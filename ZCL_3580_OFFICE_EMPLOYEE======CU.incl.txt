@@ -1,0 +1,24 @@
+class ZCL_3580_OFFICE_EMPLOYEE definition
+  public
+  inheriting from ZCL_3580_EMPLOYEE
+  final
+  create public .
+
+public section.
+
+  methods CONSTRUCTOR
+    importing
+      !IT_NAME type STRING
+      !IT_DOB type DATE
+      !IT_BASE_SALARY type INTEGER
+      !IT_ADDRESS type STRING
+      !IT_OFFICE type STRING .
+  methods GET_OFFICE
+    returning
+      value(R_OFFICE) type STRING .
+  methods SET_OFFICE
+    importing
+      !IT_OFFICE type STRING .
+
+  methods PRINT
+    redefinition .

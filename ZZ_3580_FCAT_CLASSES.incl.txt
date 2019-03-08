@@ -1,0 +1,61 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZZ_3580_FCAT_CLASSES
+*&---------------------------------------------------------------------*
+
+CLASS lcl_event_handler DEFINITION.
+  PUBLIC SECTION.
+    CLASS-METHODS: on_double_click FOR EVENT double_click OF cl_gui_alv_grid IMPORTING es_row_no,
+                   on_toolbar FOR EVENT toolbar OF cl_gui_alv_grid IMPORTING e_object,
+                   on_user_command FOR EVENT user_command OF cl_gui_alv_grid IMPORTING e_ucomm,
+                   on_top_of_list FOR EVENT print_top_of_list OF cl_gui_alv_grid.
+ENDCLASS.
+
+CLASS lcl_event_handler IMPLEMENTATION.
+  METHOD on_double_click.
+    DATA wa_books LIKE LINE OF it_book.
+    READ TABLE it_book INTO wa_books INDEX es_row_no-row_id.
+
+    SELECT SINGLE * FROM scustom INTO wa_custom WHERE id = wa_books-customid.
+      CALL SCREEN 300.
+  ENDMETHOD.
+
+  METHOD on_toolbar.
+    DATA wa_button TYPE stb_button.
+    wa_button-function = 'BONUS'.
+    wa_button-quickinfo = 'Bonus points'.
+    wa_button-butn_type = 0.
+    wa_button-text = 'Bonus'.
+    INSERT wa_button INTO TABLE e_object->mt_toolbar.
+  ENDMETHOD.
+
+  METHOD on_user_command.
+    DATA lv_row TYPE i.
+    DATA lv_data LIKE LINE OF it_book.
+    DATA lv_fltime TYPE S_FLTIME.
+    DATA lv_bonus TYPE i.
+    DATA lv_no_flights TYPE i.
+    DATA lv_bonus_string TYPE string.
+    DATA lv_bonus_out TYPE string.
+    CALL METHOD r_alv->get_current_cell
+      IMPORTING
+        e_row = lv_row.
+
+    READ TABLE it_book INTO lv_data INDEX lv_row.
+    SELECT fltime FROM spfli INTO lv_fltime WHERE carrid = lv_data-carrid AND connid = lv_data-connid.
+      SELECT count( * ) FROM sbook INTO lv_no_flights WHERE passname = lv_data-name.
+      lv_bonus = lv_fltime / 10.
+      lv_bonus = lv_bonus + ( 100 * lv_no_flights ).
+    ENDSELECT.
+    lv_bonus_string = lv_bonus.
+    CONCATENATE 'Bonus: ' lv_bonus_string 'Points.' INTO lv_bonus_out.
+    MESSAGE lv_bonus_out TYPE 'I'.
+  ENDMETHOD.
+
+  METHOD on_top_of_list.
+    DATA lv_name TYPE string.
+    SELECT name FROM stravelag INTO lv_name WHERE agencynum = stravelag-agencynum.
+      WRITE: / 'Booking for', lv_name, 'on', sy-datum.
+    ENDSELECT.
+
+  ENDMETHOD.
+ENDCLASS.

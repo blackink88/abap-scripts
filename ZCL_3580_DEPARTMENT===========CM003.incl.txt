@@ -1,0 +1,26 @@
+  method GET_AVG_PERCENTAGE.
+
+DATA c_employee TYPE REF TO ZCL_3580_EMPLOYEE.
+DATA f_employee TYPE REF TO ZCL_3580_Field_Staff.
+
+
+
+
+LOOP AT mt_employees INTO c_employee.
+DATA c TYPE i.
+
+TRY.
+f_employee ?= c_employee.
+ CATCH cx_sy_move_cast_error.
+
+
+ENDTRY.
+  c =   c + f_employee->get_percentage( ).
+p_departmentsname = c / c_employee->get_n_o_employees( ).
+
+ENDLOOP.
+
+WRITE: / 'This', p_departmentsname.
+
+
+  endmethod.

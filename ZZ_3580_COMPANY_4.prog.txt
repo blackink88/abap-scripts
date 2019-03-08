@@ -1,0 +1,115 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_COMPANY_4
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_COMPANY_4.
+
+INCLUDE ZZ_3580_COMPANY_4_CLASSES.
+START-OF-SELECTION.
+ DATA r_employee1 TYPE REF TO lcl_office_employee.
+DATA r_employee2 TYPE REF TO lcl_office_employee.
+ DATA r_employee3 TYPE REF TO lcl_office_employee.
+ DATA r_employee4 TYPE REF TO lcl_office_employee.
+DATA r_employee5 TYPE REF TO lcl_office_employee.
+ DATA r_employee6 TYPE REF TO lcl_office_employee.
+ DATA r_building TYPE REF TO lcl_building.
+DATA r_conference TYPE REF TO lcl_conference_location.
+ DATA r_building2 TYPE REF TO lcl_building.
+DATA r_conference2 TYPE REF TO lcl_conference_location.
+DATA r_conference3 TYPE REF TO lcl_conference_location.
+DATA r_conference4 TYPE REF TO lcl_conference_location.
+DATA r_conference5 TYPE REF TO lcl_conference_location.
+
+CREATE OBJECT r_conference EXPORTING im_rname = 'Conference Location Team Meeting Location'.
+CREATE OBJECT r_conference2 EXPORTING im_rname = 'Conference Location Middle Location'.
+CREATE OBJECT r_conference3 EXPORTING im_rname = 'Conference Location Kasi Meeting Location'.
+CREATE OBJECT r_conference4 EXPORTING im_rname = 'Conference Location Ohavelo Location'.
+CREATE OBJECT r_conference5 EXPORTING im_rname = 'Conference Location Team Meeting Location'.
+
+CREATE OBJECT r_employee1 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 3100
+
+       im_office = '  “Room A17-C'              it_dob = '19690202'.
+*
+
+CREATE OBJECT r_employee2 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 3100
+
+       im_office = '  “Room A17-C'              it_dob = '19590202'.
+
+*
+
+
+CREATE OBJECT r_employee3 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 6200
+im_office = '  “Room A18-B'
+                                     it_dob = '19500404'.
+
+
+CREATE OBJECT r_employee4 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 3100
+
+       im_office = '  “Room A17-C'              it_dob = '19690202'.
+*
+
+CREATE OBJECT r_employee5 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 3100
+
+       im_office = '  “Room A17-C'              it_dob = '19590202'.
+
+*
+
+
+CREATE OBJECT r_employee6 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 6200
+im_office = '  “Room A18-B'
+                                     it_dob = '19500404'.
+
+
+
+CREATE OBJECT r_building EXPORTING im_bname = 'For the building Office Tower of the following requirements have been entered.'
+                                    available_medium_rooms = 3
+available_small_rooms = 3
+                                   available_large_rooms = 2.
+
+CREATE OBJECT r_building2 EXPORTING im_bname = 'For the building Mondesa Twins Flats of the following requirements have been entered.'
+                                    available_medium_rooms = 3
+available_small_rooms = 3
+                                   available_large_rooms = 2.
+
+
+
+
+CALL METHOD r_building->add_requirement  EXPORTING ir_requirement = r_employee1.
+CALL METHOD r_building->add_requirement  EXPORTING ir_requirement = r_employee2.
+CALL METHOD r_building->add_requirement  EXPORTING ir_requirement = r_employee3.
+
+CALL METHOD r_building->add_requirement  EXPORTING ir_requirement = r_conference.
+
+
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_employee4.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_employee5.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_employee6.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_conference2.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_conference3.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_conference4.
+CALL METHOD r_building2->add_requirement  EXPORTING ir_requirement = r_conference5.
+
+r_building->print_utilisation( ).
+
+r_building2->print_utilisation( ).

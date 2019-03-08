@@ -1,0 +1,22 @@
+*=====================================================================*
+* Intf.: ZIWCI_Z_3580_WD_TRAY
+* Purp.: programming interface for WebDynpro cross component access of
+*        controller:  <COMPONENTCONTROLLER> of
+*        component:   <zz_3580_wd_tray>
+* UDate: 20151129 155245
+*=====================================================================*
+interface ziwci_z_3580_wd_tray public.
+
+* +-------------------------------------------------------------------+
+* |  context type definitions                                         |
+* +-------------------------------------------------------------------+
+
+********
+* @Returns:  controller runtime interface
+********
+  methods wd_get_api
+    returning
+      value(Result) type ref to IF_WD_CONTROLLER.  "#EC NEEDED
+
+
+endinterface.

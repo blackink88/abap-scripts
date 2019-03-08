@@ -1,0 +1,16 @@
+class ZCL_3580_SINGLETON definition
+  public
+  final
+  create private
+
+  global friends ZCL_3580_FLINFO .
+
+public section.
+
+  types:
+    TY_CONNECTION_LIST TYPE TABLE OF spfli WITH KEY carrid connid .
+
+  class-methods CLASS_CONSTRUCTOR .
+  class-methods GET_SINGLETON
+    returning
+      value(RE_SINGLETON) type ref to ZCL_3580_SINGLETON .

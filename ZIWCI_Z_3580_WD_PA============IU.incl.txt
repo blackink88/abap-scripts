@@ -1,0 +1,29 @@
+*=====================================================================*
+* Intf.: ZIWCI_Z_3580_WD_PA
+* Purp.: programming interface for WebDynpro cross component access of
+*        controller:  <COMPONENTCONTROLLER> of
+*        component:   <zz_3580_wd_pa>
+* UDate: 20160201 051202
+*=====================================================================*
+interface ziwci_z_3580_wd_pa public.
+
+* +-------------------------------------------------------------------+
+* |  context type definitions                                         |
+* +-------------------------------------------------------------------+
+
+  types:
+    begin of Element_context,
+      TYP  type ZZ_3580_EXAM_TYPE,
+    end of Element_context,  "#EC NEEDED
+    Elements_context type
+       standard table of Element_context
+       with default key. "#EC NEEDED
+********
+* @Returns:  controller runtime interface
+********
+  methods wd_get_api
+    returning
+      value(Result) type ref to IF_WD_CONTROLLER.  "#EC NEEDED
+
+
+endinterface.

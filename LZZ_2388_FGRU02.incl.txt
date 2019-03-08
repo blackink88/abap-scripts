@@ -1,0 +1,31 @@
+FUNCTION Z_2388_GET_FLIGHTS.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(IM_CARRID) TYPE  S_CARR_ID
+*"  EXPORTING
+*"     REFERENCE(EX_LIST) TYPE  ZZ_2388_FLIST
+*"  EXCEPTIONS
+*"      SQL_ERROR
+*"      NO_AUTH
+*"----------------------------------------------------------------------
+
+AUTHORITY-CHECK OBJECT 'S_CARRID'
+         ID 'CARRID' FIELD im_carrid
+         ID 'ACTVT' FIELD '03'.
+IF sy-subrc <> 0.
+RAISE no_auth.
+ENDIF.
+
+"Select all
+SELECT * FROM spfli
+           INTO TABLE ex_list
+           WHERE carrid = im_carrid.
+IF sy-subrc = 0 .
+    " No problem
+  else.
+    raise sql_error.
+  ENDIF.
+
+
+ENDFUNCTION.

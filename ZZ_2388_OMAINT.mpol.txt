@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Module Pool       ZZ_2388_OMAINT
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+INCLUDE ZZ_2388_OMAINT_TOP                      .    " global Data
+
+* INCLUDE ZZ_2388_OMAINT_O01                      .  " PBO-Modules
+* INCLUDE ZZ_2388_OMAINT_I01                      .  " PAI-Modules
+* INCLUDE ZZ_2388_OMAINT_F01                      .  " FORM-Routines
+
+
+INCLUDE ZZ_2388_OMAINT_STATUS_0100O01.
+
+INCLUDE ZZ_2388_OMAINT_USER_COMMANDI01.
+
+INCLUDE ZZ_2388_OMAINT_STATUS_0200O01.
+
+INCLUDE ZZ_2388_OMAINT_STATUS_0300O01.
+
+INCLUDE ZZ_2388_OMAINT_STATUS_0400O01.
+
+INCLUDE ZZ_2388_OMAINT_EXITI01.
+
+INCLUDE ZZ_2388_OMAINT_USER_COMMANDI02.
+
+INCLUDE ZZ_2388_OMAINT_USER_COMMANDI03.
+
+INCLUDE ZZ_2388_OMAINT_USER_COMMANDI04.

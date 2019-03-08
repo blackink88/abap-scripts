@@ -1,0 +1,73 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_2388_FLEDIT_USER_COMMANDI01 .
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_0100  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+
+MODULE USER_COMMAND_0100 INPUT.
+
+
+
+CASE ok_code.
+
+WHEN 'SELECT'.
+
+CALL FUNCTION 'ENQUEUE_EZ_SPFLI'
+
+EXPORTING
+
+MODE_SPFLI = 'S'
+MANDT = SY-MANDT
+CARRID = spfli-carrid
+CONNID = spfli-connid
+X_CARRID = ' '
+X_CONNID = ' '
+
+EXCEPTIONS
+FOREIGN_LOCK = 1
+SYSTEM_FAILURE = 2
+OTHERS = 3
+.
+If sy-subrc <> 0.
+Message 'Error setting the write lock, try again.' TYPE 'S'.
+
+
+ENDIF.
+
+
+
+SELECT SINGLE * FROM SPFLI
+INTO wa_conn
+WHERE carrid = spfli-carrid
+AND connid = spfli-connid.
+
+WHEN 'BACK'.
+
+LEAVE PROGRAM.
+
+WHEN 'EXIT'.
+LEAVE PROGRAM.
+
+ENDCASE.
+IF sy-subrc = 0.
+message s005  with wa_conn-carrid wa_conn-connid.
+
+elseif
+sy-subrc NE 0.
+ MESSAGE e004 with SPFLI-CARRID SPFLI-CONNID.
+
+ ENDIF.
+CLEAR ok_code.
+
+
+
+
+
+
+
+
+
+ENDMODULE.              " USER_COMMAND_0100  INPUT

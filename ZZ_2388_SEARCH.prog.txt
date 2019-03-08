@@ -1,0 +1,228 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_SEARCH
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_SEARCH MESSAGE-ID ZZ_2388_MESSAGES.
+TABLES sscrfields.
+DATA: BEGIN OF wa_t,
+        carrid     TYPE spfli-carrid   ,
+        connid     TYPE spfli-connid   ,
+        countryfr  TYPE spfli-countryfr,
+        cityfrom   TYPE spfli-cityfrom  ,
+        countryto  TYPE spfli-countryto,
+        cityto     TYPE spfli-cityto   ,
+
+        fldate     TYPE sflight-fldate ,
+        seatsmax   TYPE sflight-seatsmax ,
+        seatsocc   TYPE sflight-seatsocc ,
+        seatsmax_b TYPE sflight-seatsmax_b,
+        seatsocc_b TYPE sflight-seatsocc_b,
+        seatsmax_f TYPE sflight-seatsmax_f,
+        seatsocc_f TYPE sflight-seatsocc_f,
+
+
+        carrname TYPE scarr-carrname,
+
+        class  TYPE sbook-class,
+
+
+      END OF wa_t.
+
+DATA f_free TYPE i.
+DATA b_free TYPE i.
+DATA e_free TYPE i.
+DATA free TYPE i.
+
+DATA  total TYPE i.
+DATA  t TYPE i.
+
+DATA it_tab LIKE SORTED TABLE OF wa_t WITH UNIQUE KEY fldate carrname connid .
+ .
+
+
+
+Data t_f type i.
+Data t_e type i.
+Data t_b type i.
+
+Data wa TYPE sflight.
+DATA wa_p TYPE sbook.
+Data w TYPE spfli.
+DATA y TYPE scarr.
+DATA cl TYPE c.
+
+DATA: fcode type sy-ucomm.
+SELECTION-SCREEN BEGIN OF SCREEN 800.
+
+SELECTION-SCREEN COMMENT  1(50) comm5.
+SELECTION-SCREEN SKIP 2.
+SELECTION-SCREEN COMMENT  1(50) comm3.
+SELECTION-SCREEN ULINE.
+
+ SELECT-OPTIONS:
+
+so_fd FOR wa-fldate.
+SELECTION-SCREEN COMMENT /1(60) COMM1.
+ SELECT-OPTIONS: so_cf FOR w-countryfr NO INTERVALS,
+so_cityf FOR w-cityfrom NO INTERVALS.
+
+
+SELECTION-SCREEN COMMENT /1(60) COMM2.
+ SELECT-OPTIONS:
+ so_ct FOR w-countryto NO INTERVALS,
+so_cto FOR w-cityto NO INTERVALS.
+
+PARAMETERS cla LIKE wa_p-CLASS OBLIGATORY .
+SELECT-OPTIONS: so_pr FOR wa-price.
+
+SELECTION-SCREEN SKIP 1.
+SELECTION-SCREEN PUSHBUTTON 5(20) mybtn USER-COMMAND mybtn1.
+
+ SELECTION-SCREEN END OF SCREEN 800.
+
+CALL SELECTION-SCREEN 800 STARTING AT 1 1.
+START-OF-SELECTION.
+
+DATA name_t(50) Type c.
+IF CLA = 'C'.
+cl = 'C' .
+name_t = 'Business class'.
+free = b_free  .
+ELSEIF CLA ='Y'.
+cl = 'Y'.
+name_t = 'Economy class'.
+ free = e_free .
+ELSEIF CLA = 'F'.
+cl = 'F'.
+ free = f_free.
+name_t = 'First class'.
+ELSE.
+MESSAGE 'No results have been found for the search.' TYPE 'E'.
+ENDIF.
+ WRITE: 'These flights match your search criteria: ', name_t.
+FORMAT COLOR 4.
+ULINE AT /(111).
+WRITE:/'|From',24 '|To ',47 '|Date',60 '|Free S ',74 '|Total S ',88 '|Airline ', 111'|'.
+FORMAT RESET.
+
+
+
+
+
+
+
+
+IF SY-SUBRC = 0.
+
+
+
+
+SELECT spfli~carrid
+       spfli~connid
+       spfli~countryfr
+       spfli~cityfrom
+       spfli~countryto
+       spfli~cityto
+
+       sflight~fldate
+       sflight~seatsmax
+       sflight~seatsocc
+       sflight~seatsmax_b
+       sflight~seatsocc_b
+       sflight~seatsmax_f
+       sflight~seatsocc_f
+
+
+       scarr~carrname
+
+
+INTO TABLE it_tab FROM
+spfli INNER JOIN sflight ON spfli~carrid = sflight~carrid
+AND spfli~connid = sflight~connid
+
+INNER JOIN scarr ON spfli~carrid = scarr~carrid
+
+ WHERE countryfr IN so_cf
+ AND cityfrom IN so_cityf
+AND fldate IN so_fd
+ AND cityto IN so_cto
+AND price IN so_pr
+And countryto IN so_ct.
+
+
+
+
+
+
+
+
+ULINE AT /(111).
+
+loop at it_tab into wa_t.
+
+
+total =  wa_t-seatsmax_b + wa_t-seatsmax_f + wa_t-seatsmax.
+e_free =  wa_t-seatsmax - wa_t-seatsocc .
+b_free = wa_t-seatsmax_b - wa_t-seatsocc_b .
+f_free = wa_t-seatsmax_f - wa_t-seatsocc_f .
+IF
+cl = 'C' .
+ free = b_free.
+
+ELSEIF
+cl = 'Y'.
+free = e_free.
+
+ELSEIF
+cl = 'F'.
+free = f_free.
+
+ENDIF.
+
+
+
+IF free > 0.
+
+    write:/ '|', wa_t-cityfrom, '|', wa_t-cityto, '|', wa_t-fldate, '|', free, '|', total, '|',wa_t-carrname, '|'.
+FORMAT COLOR 4.
+ULINE /(111).
+FORMAT RESET.
+endif.
+
+endloop.
+
+
+
+
+
+
+ENDIF.
+
+IF sy-subrc = 4.
+Message 'No results found' TYPE 'E'.
+ENDIF.
+
+
+
+   AT SELECTION-SCREEN OUTPUT.
+
+ LOOP AT SCREEN.
+
+ IF sscrfields-ucomm = 'mybtn1'.
+endif.
+  MODIFY SCREEN.
+REFRESH  :so_fd, so_ct, so_cto, so_pr, so_cityf, so_cf.
+clear : cla.
+
+
+ENDLOOP.
+INITIALIZATION.
+mybtn = 'Delete input'.
+comm1 ='Where should the flight depart?'.
+comm2 = 'Which destination should the flight have?'.
+comm3 = 'Welcome to the flight search program'.
+comm5 = 'BEACH CHAIR PLC'.

@@ -1,0 +1,12 @@
+*******************************************************************
+*   System-defined Include-files.                                 *
+*******************************************************************
+  INCLUDE LZZ_2388_FGRTOP.                   " Global Data
+  INCLUDE LZZ_2388_FGRUXX.                   " Function Modules
+
+*******************************************************************
+*   User-defined Include-files (if necessary).                    *
+*******************************************************************
+* INCLUDE LZZ_2388_FGRF...                   " Subprograms
+* INCLUDE LZZ_2388_FGRO...                   " PBO-Modules
+* INCLUDE LZZ_2388_FGRI...                   " PAI-Modules

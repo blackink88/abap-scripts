@@ -1,0 +1,3 @@
+private section.
+
+  data BASE_SALARY type INTEGER .

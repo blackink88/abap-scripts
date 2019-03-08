@@ -1,0 +1,17 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_SO_READER
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_SO_READER.
+
+DATA: r_handle TYPE REF TO ZCL_3580_AREA,
+      wa TYPE spfli.
+
+r_handle = zcl_3580_area=>attach_for_read( ).
+LOOP AT r_handle->root->catalogue->connections INTO wa.
+  WRITE : / wa-carrid, wa-connid, wa-cityfrom, wa-cityto.
+ENDLOOP.
+r_handle->detach( ).

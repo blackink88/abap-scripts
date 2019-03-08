@@ -1,0 +1,24 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_CALC
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_CALC.
+
+PARAMETERS: p_1 TYPE i,
+            p_2 TYPE i.
+
+DATA: result TYPE i,
+      r_cx TYPE REF TO CX_SY_ARITHMETIC_ERROR.
+
+AT SELECTION-SCREEN.
+TRY.
+result = p_1 / p_2.
+CATCH CX_SY_ARITHMETIC_ERROR INTO r_cx.
+  MESSAGE r_cx->get_text( ) TYPE 'E'.
+ENDTRY.
+
+START-OF-SELECTION.
+WRITE result.

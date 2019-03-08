@@ -1,0 +1,10 @@
+  method CONSTRUCTOR.
+
+
+mv_departmentsname = iv_departmentsname.
+
+
+
+
+
+  endmethod.

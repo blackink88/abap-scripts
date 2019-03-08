@@ -1,0 +1,3 @@
+*"* dummy include to reduce generation dependencies between
+*"* class ZIWCI_Z_3580_WD_DATA and it's users.
+*"* touched if any type reference has been changed

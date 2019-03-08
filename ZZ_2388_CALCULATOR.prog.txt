@@ -1,0 +1,41 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_CALCULATOR
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_CALCULATOR.
+
+PARAMETERS OPERAND1 TYPE i.
+PARAMETERS OPERAND2 TYPE i.
+PARAMETERS OPERATOR(1) TYPE c.
+
+DATA calc TYPE i.
+
+CALL FUNCTION 'Z_2388_F_CALC'
+  EXPORTING
+    im_operand1       = operand1
+    im_operand2       = operand2
+    im_operator       = operator
+IMPORTING
+ EX_RESULT         = calc
+
+EXCEPTIONS
+ZERO_DIVISION = 1
+INVALID_OPERATOR = 2
+.
+
+  .
+
+CASE sy-subrc.
+  WHEN 0.
+    WRITE: operand1, ' ', operator, ' ', operand2, ' = ', calc.
+  WHEN 1.
+    WRITE 'Division is Null.'.
+  WHEN 2.
+    WRITE 'Not a correct operator.'.
+  WHEN OTHERS.
+    WRITE 'Sorry, cant carry on'.
+ENDCASE.

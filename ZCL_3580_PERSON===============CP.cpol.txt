@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_PERSON
+
+*"* local type definitions
+include ZCL_3580_PERSON===============ccdef.
+
+*"* class ZCL_3580_PERSON definition
+*"* public declarations
+  include ZCL_3580_PERSON===============cu.
+*"* protected declarations
+  include ZCL_3580_PERSON===============co.
+*"* private declarations
+  include ZCL_3580_PERSON===============ci.
+endclass. "ZCL_3580_PERSON definition
+
+*"* macro definitions
+include ZCL_3580_PERSON===============ccmac.
+*"* local class implementation
+include ZCL_3580_PERSON===============ccimp.
+
+class ZCL_3580_PERSON implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_PERSON implementation
+

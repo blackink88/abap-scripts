@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCX_3580_EXCEPTION
+
+*"* local type definitions
+include ZCX_3580_EXCEPTION============ccdef.
+
+*"* class ZCX_3580_EXCEPTION definition
+*"* public declarations
+  include ZCX_3580_EXCEPTION============cu.
+*"* protected declarations
+  include ZCX_3580_EXCEPTION============co.
+*"* private declarations
+  include ZCX_3580_EXCEPTION============ci.
+endclass. "ZCX_3580_EXCEPTION definition
+
+*"* macro definitions
+include ZCX_3580_EXCEPTION============ccmac.
+*"* local class implementation
+include ZCX_3580_EXCEPTION============ccimp.
+
+class ZCX_3580_EXCEPTION implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCX_3580_EXCEPTION implementation
+

@@ -1,0 +1,34 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_VAT
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_VAT2.
+PARAMETERS net TYPE p DECIMALS 2.
+PARAMETERS vat TYPE p DECIMALS 2.
+
+
+DATA total TYPE p DECIMALS 2.
+
+perform calculation
+            using
+                net
+               vat
+            changing
+                total.
+WRITE : / 'Net:',net.
+WRITE : / 'VAT:',vat.
+WRITE : / 'Total:', total.
+
+FORM calculation
+using
+value(baseval) TYPE p
+value(percent) TYPE p
+changing
+value(result) TYPE p.
+result = baseval * ( 1 + percent / 100 ).
+
+ENDFORM.

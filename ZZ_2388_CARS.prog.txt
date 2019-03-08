@@ -1,0 +1,80 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_CARS
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+REPORT  ZZ_2388_CARS.
+TYPES: BEGIN OF str_car,
+ manufacturer(20) TYPE c,
+ model(20) TYPE c,
+serialn(10) TYPE n,
+yearc(4) TYPE n,
+ power TYPE i,
+ color(6) TYPE c,
+ country(20) TYPE c,
+ body(6) TYPE c,
+
+END OF str_car.
+
+
+
+DATA mycar TYPE str_car.
+mycar-manufacturer = 'Volkswagen'.
+mycar-model = 'Passat'.
+mycar-serialn = 2000.
+mycar-yearc = 1998.
+mycar-power = 100.
+mycar-color = 'Red'.
+mycar-country = 'Germany'.
+mycar-body = '2-door'.
+
+DATA mycar1 TYPE str_car.
+mycar1-manufacturer = 'Mercedes Benz'.
+mycar1-model = 'C-Class'.
+mycar1-serialn = 2004.
+mycar1-yearc = 2003.
+mycar1-power = 132.
+mycar1-color = 'Black'.
+mycar1-country = 'Germany'.
+mycar1-body = '4-door'.
+
+DATA mycar2 TYPE str_car.
+mycar2-manufacturer = 'Volkswagen'.
+mycar2-model = 'Polo'.
+mycar2-serialn = 2009.
+mycar2-yearc = 2007.
+mycar2-power = 130.
+mycar2-color = 'Green'.
+mycar2-country = 'Germany'.
+mycar2-body = '4-door'.
+
+
+DATA mycar3 TYPE str_car.
+mycar3-manufacturer = 'BMW'.
+mycar3-model = 'i8'.
+mycar3-serialn = 2010.
+mycar3-yearc = 2009.
+mycar3-power = 200.
+mycar3-color = 'Black'.
+mycar3-country = 'Germany'.
+mycar3-body = '4-door'.
+
+
+TYPES tab_cars TYPE STANDARD TABLE OF str_car WITH KEY serialn.
+DATA itab_cars TYPE tab_cars.
+
+INSERT mycar INTO TABLE itab_cars.
+INSERT mycar1 INTO TABLE itab_cars.
+INSERT mycar2 INTO TABLE itab_cars.
+INSERT mycar3 INTO TABLE itab_cars.
+
+DELETE TABLE itab_cars WITH TABLE KEY  serialn = 2000.
+
+LOOP AT itab_cars INTO mycar.
+ WRITE:  / 'Sy-tabix:',sy-tabix, / 'Car Manufacturer:',mycar-manufacturer, / 'Car Model:',mycar-model, / 'Serial Number:',mycar-serialn, / 'Car date:',mycar-yearc, / 'Car power:',mycar-power,
+/ 'Color of car:',mycar-color, / 'Country of origin:',mycar-country, / 'Car body details:',mycar-body.
+ENDLOOP.

@@ -1,0 +1,5 @@
+  method GET_SALES.
+
+    rv_sales = sales.
+
+  endmethod.

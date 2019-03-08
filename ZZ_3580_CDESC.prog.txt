@@ -1,0 +1,44 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_CDESC
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_CDESC.
+
+INCLUDE ZZ_3580_COMPANY_2_CLASSES.
+
+DATA:
+      r_employee TYPE REF TO lcl_employee,
+      r_office_employee TYPE REF TO lcl_office_employee,
+      r_desc TYPE REF TO cl_abap_classdescr,
+      r_desc_super TYPE REF TO cl_abap_classdescr,
+      r_desc_super_super TYPE REF TO cl_abap_classdescr,
+      name TYPE string.
+
+START-OF-SELECTION.
+CREATE OBJECT r_office_employee
+  EXPORTING
+    it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1000
+
+       im_office = '  “Room A17-C'              it_dob = '20112015'.
+
+r_employee = r_office_employee.
+r_desc ?= cl_abap_typedescr=>describe_by_object_ref( r_employee ).
+name = r_desc->get_relative_name( ).
+
+WRITE: / name.
+
+r_desc_super = r_desc->get_super_class_type( ).
+name = r_desc_super->get_relative_name( ).
+
+WRITE: / name.
+
+r_desc_super_super = r_desc_super->get_super_class_type( ).
+name = r_desc_super_super->get_relative_name( ).
+
+WRITE: / name.

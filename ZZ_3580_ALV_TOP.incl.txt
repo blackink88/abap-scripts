@@ -1,0 +1,9 @@
+*&---------------------------------------------------------------------*
+*& Include ZZ_3580_ALV_TOP                                   Module Pool      ZZ_3580_ALV
+*&
+*&---------------------------------------------------------------------*
+PROGRAM ZZ_3580_ALV.
+DATA ok_code LIKE sy-ucomm.
+DATA r_container TYPE REF TO cl_gui_custom_container.
+DATA r_alv TYPE REF TO cl_gui_alv_grid.
+DATA it_scarr TYPE TABLE OF scarr.

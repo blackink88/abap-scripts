@@ -1,0 +1,15 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_SINGLETON
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_SINGLETON.
+
+
+DATA: r_singleton1 TYPE REF TO ZCL_3580_SINGLETON,
+      r_singleton2 TYPE REF TO zcl_3580_singleton.
+
+r_singleton1 = zcl_3580_singleton=>get_singleton( ).
+r_singleton2 = zcl_3580_singleton=>get_singleton( ).

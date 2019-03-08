@@ -1,0 +1,135 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_FLIGHTS
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_FLIGHTS MESSAGE-ID ZZ_2388_MESSAGES.
+
+SELECTION-SCREEN COMMENT  1(50) test.
+SELECTION-SCREEN ULINE.
+SELECTION-SCREEN SKIP 1.
+INITIALIZATION.
+
+test = 'Welcome to the Test Program'.
+
+TABLES : sscrfields.
+PARAMETERS  pa_carr TYPE spfli-carrid.
+
+
+
+DATA wa TYPE spfli.
+DATA itab TYPE TABLE OF spfli.
+
+
+START-OF-SELECTION.
+  CALL FUNCTION 'Z_2388_GET_FLIGHTS'
+    EXPORTING
+      im_carrid = pa_carr
+    IMPORTING
+      ex_list  = itab
+    EXCEPTIONS
+      sql_error = 5
+      no_auth   = 7.
+
+
+IF sy-subrc = 0.
+
+FORMAT COLOR 4.
+ULINE /(66).
+WRITE: /'|Connection',12'|From',39'|To',66'|'.
+FORMAT RESET.
+
+ULINE /(66).
+
+LOOP AT itab INTO wa.
+
+
+
+WRITE:  / '|',wa-carrid, wa-connid, '|',wa-countryfr, wa-cityfrom, '|',wa-countryto, wa-cityto,'|'.
+HIDE wa.
+FORMAT COLOR 4.
+ULINE /(66).
+FORMAT RESET.
+HIDE wa.
+
+ENDLOOP.
+
+
+
+ELSEIF sy-subrc = 7.
+MESSAGE e002.
+ELSEIF sy-subrc = 5.
+MESSAGE e001.
+ENDIF.
+
+
+
+AT LINE-SELECTION.
+
+IF sy-lsind = 1.
+MESSAGE s000 with pa_carr.
+ IF sy-lilli > 5.
+      FORMAT COLOR 5.
+      WRITE: 'Flight for the connection of ', wa-carrid, wa-connid.
+      ULINE /(48).
+    WRITE: /'|Date', 13 '|Plane', 24 '|Seats', 36 '|Occ', 48 '|'.
+      ULINE /(48).
+      FORMAT RESET.
+  DATA wa_sflight LIKE sflight.
+      SELECT * FROM sflight INTO wa_sflight
+        WHERE carrid = wa-carrid AND connid = wa-connid.
+        WRITE: / '|', wa_sflight-fldate,
+              13 '|', wa_sflight-planetype,
+              24 '|', wa_sflight-seatsmax,
+              36 '|', wa_sflight-seatsocc,
+              48 '|'.
+      ENDSELECT.
+FORMAT COLOR 5.
+ULINE /(48).
+FORMAT RESET.
+
+
+IF sy-subrc = 0.
+ MESSAGE s003 WITH wa-connid.
+ ELSE.
+ MESSAGE e002.
+ ENDIF.
+ENDIF.
+ENDIF.
+
+
+
+
+SELECTION-SCREEN COMMENT  60(50) text.
+SELECTION-SCREEN SKIP 2.
+SELECTION-SCREEN PUSHBUTTON 60(20) desc USER-COMMAND clear.
+
+
+
+INITIALIZATION.
+
+
+text = 'Please select a valid ID'.
+desc = 'Clear input'.
+
+
+
+   AT SELECTION-SCREEN OUTPUT.
+
+
+
+
+ LOOP AT SCREEN.
+
+IF sscrfields-ucomm = 'CLEAR'.
+
+    ENDIF.
+    MODIFY SCREEN.
+  CLEAR pa_carr.
+ENDLOOP.
+
+
+               .

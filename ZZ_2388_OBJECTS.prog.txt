@@ -1,0 +1,39 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_OBJECTS
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_OBJECTS.
+
+INCLUDE ZZ_2388_CLASS_INCL.
+
+
+
+DATA:
+myvehicle TYPE REF TO vehicle,
+my_water_vehicle TYPE REF TO water_vehicle,
+my_land_vehicle TYPE REF TO land_vehicle,
+vehicles TYPE TABLE OF REF TO vehicle.
+
+
+START-OF-SELECTION.
+
+
+
+
+CREATE OBJECT myvehicle TYPE water_vehicle.
+myvehicle->set_attribute_values(
+EXPORTING im_name = 'Hovercraft'
+im_seats = 25
+im_topspeed = 35 ).
+my_water_vehicle ?= myvehicle.
+my_water_vehicle->set_depth( 1 ).
+myvehicle->print( ).
+
+LOOP AT Vehicles INTO myvehicle.
+myvehicle->print( ).
+WRITE /.
+ENDLOOP.

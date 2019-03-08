@@ -1,0 +1,18 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_3580_FCAT_STATUS_0200O01.
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  STATUS_0200  OUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE STATUS_0200 OUTPUT.
+SET PF-STATUS 'STATUS200'.
+ SET TITLEBAR 'My Area'.
+
+SELECT *
+    FROM sbook
+      JOIN scustom ON sbook~customid = scustom~id
+    INTO CORRESPONDING FIELDS OF TABLE it_book
+    WHERE sbook~agencynum = stravelag-agencynum.
+ENDMODULE.

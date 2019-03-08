@@ -1,0 +1,22 @@
+*=====================================================================*
+* Intf.: ZIWCI_Z_3580_WD_BOOK
+* Purp.: programming interface for WebDynpro cross component access of
+*        controller:  <COMPONENTCONTROLLER> of
+*        component:   <zz_3580_wd_book>
+* UDate: 20151213 073756
+*=====================================================================*
+interface ziwci_z_3580_wd_book public.
+
+* +-------------------------------------------------------------------+
+* |  context type definitions                                         |
+* +-------------------------------------------------------------------+
+
+********
+* @Returns:  controller runtime interface
+********
+  methods wd_get_api
+    returning
+      value(Result) type ref to IF_WD_CONTROLLER.  "#EC NEEDED
+
+
+endinterface.

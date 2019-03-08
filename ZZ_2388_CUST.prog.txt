@@ -1,0 +1,120 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_CUST
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_CUST MESSAGE-ID ZZ_2388_CMESSAGE.
+TABLES sscrfields.
+DATA wa TYPE SCUSTOM.
+DATA switch(1) TYPE n VALUE '1' .
+
+
+
+
+SELECTION-SCREEN BEGIN OF SCREEN 800 AS SUBSCREEN.
+ SELECT-OPTIONS: so_name FOR wa-name,
+
+so_stree FOR wa-street  modif id abc.
+ SELECTION-SCREEN BEGIN OF LINE.
+ SELECTION-SCREEN COMMENT 1(20) com1 modif id abc.
+ SELECTION-SCREEN POSITION POS_LOW.
+ SELECT-OPTIONS: so_postc FOR wa-postcode NO INTERVALS NO-EXTENSION  modif id abc,
+ so_city FOR wa-city NO INTERVALS NO-EXTENSION  modif id abc.
+
+
+ SELECTION-SCREEN END OF LINE.
+SELECTION-SCREEN SKIP 1.
+SELECTION-SCREEN PUSHBUTTON 5(10) mybtn USER-COMMAND change.
+
+ SELECTION-SCREEN END OF SCREEN 800.
+
+
+
+
+
+
+
+
+SELECTION-SCREEN BEGIN OF SCREEN 900 AS SUBSCREEN.
+ SELECT-OPTIONS so_disc FOR wa-discount.
+ PARAMETERS pa_busin RADIOBUTTON GROUP ctyp DEFAULT 'X'.
+ PARAMETERS pa_priva RADIOBUTTON GROUP ctyp.
+SELECTION-SCREEN END OF SCREEN 900.
+
+
+
+
+SELECTION-SCREEN BEGIN OF TABBED BLOCK block1 FOR 5 LINES.
+
+ SELECTION-SCREEN TAB (20) tab1 USER-COMMAND addr
+ DEFAULT SCREEN 800.
+ SELECTION-SCREEN TAB (20) tab2 USER-COMMAND busi
+ DEFAULT SCREEN 900.
+ SELECTION-SCREEN END OF BLOCK block1.
+
+
+AT SELECTION-SCREEN.
+
+ IF SSCRFIELDS-UCOMM = 'CHANGE' AND SY-DYNNR = 800.
+ IF switch = '1'.
+ switch = '0'.
+ ELSE.
+ switch = '1'.
+ ENDIF.
+ ENDIF.
+
+AT SELECTION-SCREEN OUTPUT.
+
+ LOOP AT SCREEN.
+ IF SCREEN-group1 = 'ABC'.
+ SCREEN-ACTIVE = switch.
+ MODIFY SCREEN.
+ ENDIF.
+ ENDLOOP.
+
+ IF switch = '1'.
+mybtn = 'hide'.
+ ELSE.
+mybtn = 'show'.
+ ENDIF.
+
+
+
+
+START-OF-SELECTION.
+DATA typ TYPE c.
+IF pa_busin = 'X'.
+ typ = 'B'.
+ELSE.
+ typ = 'P'.
+ENDIF.
+FORMAT COLOR 1.
+WRITE: / 'Name', 27 'Street', 58 'City', 81 'Disc.', 88 'Type'.
+FORMAT COLOR 2.
+SELECT * FROM SCUSTOM
+ INTO wa
+ WHERE name IN so_name
+ AND street IN so_stree
+ AND postcode IN so_postc
+ AND city IN so_city
+ AND discount IN so_disc
+ AND custtype = typ.
+ WRITE: / wa-name, wa-street, wa-city, wa-discount, wa-custtype.
+ ENDSELECT.
+
+
+INITIALIZATION.
+tab1 = 'Address'.
+tab2 = 'Business data'.
+com1 = 'Postcode/City'.
+
+ AT SELECTION-SCREEN ON so_city.
+
+DATA:c_numeric type string value '0123456789'.
+
+IF so_city CA c_numeric.
+MESSAGE e000.
+ENDIF.

@@ -1,0 +1,28 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_KILOMETER
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_KILOMETER.
+TYPES: BEGIN OF str_car_km,
+ number TYPE i,
+ km TYPE i,
+ END OF str_car_km.
+DATA: kilometer_values TYPE SORTED TABLE OF str_car_km WITH
+UNIQUE KEY number,
+ trip TYPE str_car_km.
+trip-number = 1.
+trip-km = 100.
+COLLECT trip INTO kilometer_values.
+trip-number = 2.
+trip-km = 30.
+COLLECT trip INTO kilometer_values.
+trip-number = 1.
+trip-km = 50.
+COLLECT trip INTO kilometer_values.
+LOOP AT kilometer_values INTO trip.
+ WRITE: trip-number, trip-km.
+ENDLOOP.

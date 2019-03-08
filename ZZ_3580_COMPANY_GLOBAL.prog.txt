@@ -1,0 +1,48 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_COMPANY_GLOBAL
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_COMPANY_GLOBAL.
+DATA:
+r_department type ref to zcl_3580_department,
+r_field type ref to zcl_3580_field_staff,
+r_office type ref to zcl_3580_office_employee.
+CREATE OBJECT r_department
+  EXPORTING
+    IV_DEPARTMENTSNAME = 'An example office'.
+
+
+CREATE OBJECT r_field
+  EXPORTING
+    IT_NAME = 'Abram Mungejo'
+    IT_ADDRESS = 'Mondesa 56 Street, Justice Road'
+    IT_DOB = '19561212'
+    IT_BASE_SALARY = 2000
+    IM_PERCENTAGE = 40
+    IM_SALES = 1000.
+
+
+
+
+
+CREATE OBJECT r_office
+  EXPORTING
+    IT_NAME = 'Titi Moorie'
+    IT_DOB = '19671212'
+    IT_BASE_SALARY = 2000
+    IT_ADDRESS = '12 Merensky Street, Ausspanplatz'
+    it_office = 'Upstairs IT'.
+
+CALL METHOD r_department->ADD_EMPLOYEE
+  EXPORTING
+    IR_EMPLOYEES = r_office.
+    .
+CALL METHOD r_department->ADD_EMPLOYEE
+  EXPORTING
+    IR_EMPLOYEES = r_field.
+
+
+CALL METHOD r_department->print.

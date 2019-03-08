@@ -1,0 +1,53 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_2388_BMAINT_USER_COMMANDI01 .
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_0100  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE USER_COMMAND_0100 INPUT.
+CASE ok_code.
+WHEN 'SELECT'.
+
+SELECT SINGLE * FROM ZZ2388_BROCH
+INTO b_conn
+WHERE brnr = ZZ2388_BROCH-BRNR.
+
+IF sy-subrc = 0.
+Message s006.
+CALL SCREEN 200.
+Else .
+Message e008.
+CALL SCREEN 100.
+ENDIF.
+
+WHEN 'DELETE'.
+DELETE FROM ZZ2388_BROCH WHERE brnr = ZZ2388_BROCH-BRNR.
+
+IF sy-subrc = 0.
+
+Message s006.
+
+Else .
+Message e008.
+
+CALL SCREEN 100.
+ENDIF.
+
+WHEN 'CREATE'.
+
+CALL SCREEN 400.
+
+
+WHEN 'CHANGE'.
+
+SELECT SINGLE * FROM ZZ2388_BROCH
+INTO b_conn
+WHERE brnr = ZZ2388_BROCH-BRNR.
+CALL SCREEN 300.
+WHEN 'BACK'.
+LEAVE PROGRAM.
+ENDCASE.
+CLEAR ok_code.
+ENDMODULE.                 " USER_COMMAND_0100  INPUT

@@ -1,0 +1,78 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_2388_FLEDIT_USER_COMMANDI02 .
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  USER_COMMAND_0200  INPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE USER_COMMAND_0200 INPUT.
+CASE ok_code.
+WHEN 'BACK'.
+CALL FUNCTION 'DEQUEUE_EZ_SPFLI'
+
+EXPORTING
+
+MODE_SPFLI = 'S'
+MANDT = SY-MANDT
+CARRID = spfli-carrid
+CONNID = spfli-connid
+X_CARRID = ' '
+X_CONNID = ' '
+
+.
+WHEN 'LEAVE'.
+LEAVE PROGRAM.
+WHEN 'SAVE'.
+IF spfli <> wa_conn.
+MODIFY spfli from spfli.
+CALL FUNCTION 'ENQUEUE_EZ_SPFLI'
+
+EXPORTING
+
+MODE_SPFLI = 'E'
+MANDT = SY-MANDT
+CARRID = spfli-carrid
+CONNID = spfli-connid
+X_CARRID = ' '
+X_CONNID = ' '
+
+EXCEPTIONS
+
+FOREIGN_LOCK = 1
+SYSTEM_FAILURE = 2
+OTHERS = 3.
+
+IF sy-subrc <> 0.
+Message 'Error setting the write lock, try again.' TYPE 'E'.
+MODIFY spfli from spfli.
+ENDIF.
+
+
+CALL FUNCTION 'DEQUEUE_EZ_SPFLI'
+
+EXPORTING
+
+MODE_SPFLI = 'E'
+MANDT = SY-MANDT
+CARRID = spfli-carrid
+CONNID = spfli-connid
+X_CARRID = ' '
+X_CONNID = ' '
+.
+ENDIF.
+CALL FUNCTION 'DEQUEUE_EZ_SPFLI'
+
+EXPORTING
+
+MODE_SPFLI = 'S'
+MANDT = SY-MANDT
+CARRID = spfli-carrid
+CONNID = spfli-connid
+X_CARRID = ' '
+X_CONNID = ' '
+
+.
+
+ENDCASE.
+ENDMODULE.                 " USER_COMMAND_0200  INPUT

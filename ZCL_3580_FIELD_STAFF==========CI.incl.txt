@@ -1,0 +1,4 @@
+private section.
+
+  data PERCENTAGE type I .
+  data SALES type P .

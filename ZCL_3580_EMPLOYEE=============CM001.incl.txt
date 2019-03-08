@@ -1,0 +1,9 @@
+  method CONSTRUCTOR.
+ CALL METHOD super->constructor EXPORTING   it_name = it_name
+
+
+ it_address = it_address
+it_dob = it_dob.
+base_salary = it_base_salary.
+
+  endmethod.

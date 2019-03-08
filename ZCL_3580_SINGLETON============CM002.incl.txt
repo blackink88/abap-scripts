@@ -1,0 +1,3 @@
+  method GET_SINGLETON.
+    re_singleton = r_instance.
+  endmethod.

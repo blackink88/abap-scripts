@@ -1,0 +1,115 @@
+FUNCTION Z_2388_SOFFER.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(CARRID1) TYPE  SPFLI-CARRID
+*"     REFERENCE(CONNID1) TYPE  SPFLI-CONNID
+*"     REFERENCE(CARRID2) TYPE  SPFLI-CARRID
+*"     REFERENCE(CONNID2) TYPE  SPFLI-CONNID
+*"  EXPORTING
+*"     REFERENCE(AVAILABLE) TYPE  INTEGER4
+*"----------------------------------------------------------------------
+ TYPES: BEGIN OF wa_t,
+        carrid     TYPE spfli-carrid   ,
+        connid     TYPE spfli-connid   ,
+
+        seatsmax   TYPE sflight-seatsmax ,
+        seatsocc   TYPE sflight-seatsocc ,
+        seatsmax_b TYPE sflight-seatsmax_b,
+        seatsocc_b TYPE sflight-seatsocc_b,
+        seatsmax_f TYPE sflight-seatsmax_f,
+        seatsocc_f TYPE sflight-seatsocc_f,
+
+
+      END OF wa_t.
+
+
+Data seats_free_flight1 type i.
+Data seats_free_flight2 type i.
+
+
+
+DATA wa_flight2 TYPE wa_t .
+DATA wa_flight1 TYPE wa_t .
+
+SELECT spfli~carrid
+       spfli~connid
+
+     sflight~seatsmax
+       sflight~seatsocc
+       sflight~seatsmax_b
+       sflight~seatsocc_b
+       sflight~seatsmax_f
+       sflight~seatsocc_f
+
+
+
+
+       INTO wa_flight1
+FROM
+SPFLI INNER JOIN sflight ON spfli~carrid = sflight~carrid
+AND spfli~connid = sflight~connid
+
+  WHERE spfli~carrid  = carrid1
+  AND spfli~connid  = connid1.
+
+
+
+
+
+
+SELECT spfli~carrid
+       spfli~connid
+
+     sflight~seatsmax
+       sflight~seatsocc
+       sflight~seatsmax_b
+       sflight~seatsocc_b
+       sflight~seatsmax_f
+       sflight~seatsocc_f
+
+
+
+       INTO  wa_flight2
+FROM
+SPFLI INNER JOIN sflight ON spfli~carrid = sflight~carrid
+AND spfli~connid = sflight~connid
+
+  WHERE spfli~carrid  = carrid2
+  AND spfli~connid  = connid2.
+
+
+
+
+
+seats_free_flight1 = wa_flight1-seatsmax + wa_flight1-seatsmax_f + wa_flight1-SEATSMAX_B - wa_flight1-SEATSOCC -
+wa_flight2-SEATSOCC_F - wa_flight1-SEATSMAX_B.
+
+seats_free_flight2 = wa_flight2-seatsmax + wa_flight2-seatsmax_f + wa_flight2-SEATSMAX_B - wa_flight2-SEATSOCC -
+wa_flight2-SEATSOCC_F - wa_flight2-SEATSMAX_B.
+
+
+
+
+
+
+if seats_free_flight1 > 0 AND seats_free_flight2 > 0.
+available = 1.
+ENDIF.
+
+
+
+
+ENDSELECT.
+ENDSELECT.
+
+
+
+
+
+
+
+
+
+
+ENDFUNCTION.

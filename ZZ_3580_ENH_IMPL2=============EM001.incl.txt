@@ -1,0 +1,3 @@
+METHOD SET_NAME .
+name = im_name.
+ENDMETHOD.

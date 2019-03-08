@@ -1,0 +1,40 @@
+*&---------------------------------------------------------------------*
+*& Report  ZCX_3580_EXCEPTION
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZCX_3580_EXCEPTION.
+
+DATA: lv_result TYPE spfli,
+      lcx_exception TYPE REF TO zcx_3580_exception.
+
+TRY.
+CALL METHOD zcl_3580_flinfo=>get_connection
+  EXPORTING
+    im_carrid     = 'LH'
+    im_connid     = 0400
+  RECEIVING
+    re_connection = lv_result
+    .
+WRITE: lv_result-cityfrom, lv_result-cityto.
+
+ CATCH zcx_3580_exception INTO lcx_exception.
+   WRITE / lcx_exception->get_text( ).
+ENDTRY.
+
+TRY.
+CALL METHOD zcl_3580_flinfo=>get_connection
+  EXPORTING
+    im_carrid     = 'LH'
+    im_connid     = 999
+  RECEIVING
+    re_connection = lv_result
+    .
+
+WRITE: / lv_result-cityfrom, lv_result-cityto.
+
+ CATCH zcx_3580_exception INTO lcx_exception.
+   WRITE / lcx_exception->get_text( ).
+ENDTRY.

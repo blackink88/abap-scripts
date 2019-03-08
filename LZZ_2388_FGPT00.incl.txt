@@ -1,0 +1,26 @@
+*---------------------------------------------------------------------*
+*    view related data declarations
+*   generation date: 13.06.2015 at 13:28:56 by user USER2-388
+*   view maintenance generator version: #001407#
+*---------------------------------------------------------------------*
+*...processing: ZZ2388_PARTNER..................................*
+TABLES: ZZ2388_PARTNER, *ZZ2388_PARTNER. "view work areas
+CONTROLS: TCTRL_ZZ2388_PARTNER
+TYPE TABLEVIEW USING SCREEN '0100'.
+DATA: BEGIN OF STATUS_ZZ2388_PARTNER. "state vector
+          INCLUDE STRUCTURE VIMSTATUS.
+DATA: END OF STATUS_ZZ2388_PARTNER.
+* Table for entries selected to show on screen
+DATA: BEGIN OF ZZ2388_PARTNER_EXTRACT OCCURS 0010.
+INCLUDE STRUCTURE ZZ2388_PARTNER.
+          INCLUDE STRUCTURE VIMFLAGTAB.
+DATA: END OF ZZ2388_PARTNER_EXTRACT.
+* Table for all entries loaded from database
+DATA: BEGIN OF ZZ2388_PARTNER_TOTAL OCCURS 0010.
+INCLUDE STRUCTURE ZZ2388_PARTNER.
+          INCLUDE STRUCTURE VIMFLAGTAB.
+DATA: END OF ZZ2388_PARTNER_TOTAL.
+
+*.........table declarations:.................................*
+TABLES: SBUSPART                       .
+TABLES: STRAVELAG                      .

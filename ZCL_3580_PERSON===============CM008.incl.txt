@@ -1,0 +1,3 @@
+  method SET_NAME.
+NAME = it_name.
+  endmethod.

@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_DEPARTMENT
+
+*"* local type definitions
+include ZCL_3580_DEPARTMENT===========ccdef.
+
+*"* class ZCL_3580_DEPARTMENT definition
+*"* public declarations
+  include ZCL_3580_DEPARTMENT===========cu.
+*"* protected declarations
+  include ZCL_3580_DEPARTMENT===========co.
+*"* private declarations
+  include ZCL_3580_DEPARTMENT===========ci.
+endclass. "ZCL_3580_DEPARTMENT definition
+
+*"* macro definitions
+include ZCL_3580_DEPARTMENT===========ccmac.
+*"* local class implementation
+include ZCL_3580_DEPARTMENT===========ccimp.
+
+class ZCL_3580_DEPARTMENT implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_DEPARTMENT implementation
+

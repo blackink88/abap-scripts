@@ -1,0 +1,13 @@
+ENHANCEMENT 1  .
+TYPES:
+carrid TYPE s_carrid.
+
+
+ENDENHANCEMENT.
+ENHANCEMENT 2  .
+
+
+WRITE: wa_carrier-carrid.
+
+
+ENDENHANCEMENT.

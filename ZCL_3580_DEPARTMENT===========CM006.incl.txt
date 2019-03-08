@@ -1,0 +1,26 @@
+  method PRINT.
+
+WRITE: / 'Employees of the department', mv_departmentsname.
+
+
+
+DATA r_employee TYPE REF TO ZCL_3580_EMPLOYEE.
+
+
+LOOP AT mt_employees INTO r_employee.
+
+ r_employee->print( ).
+
+
+
+ENDLOOP.
+
+
+
+
+
+
+
+
+
+  endmethod.

@@ -1,0 +1,3 @@
+  method GET_DOB.
+r_dob = dob.
+  endmethod.

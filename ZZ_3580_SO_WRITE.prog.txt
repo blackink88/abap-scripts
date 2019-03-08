@@ -1,0 +1,25 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_SO_WRITE
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_SO_WRITE.
+
+DATA: r_handle TYPE REF TO ZCL_3580_AREA,
+      r_root TYPE REF TO ZCL_3580_ROOT,
+      r_catalogue TYPE REF TO zcl_3580_catalogue.
+
+r_handle = zcl_3580_area=>attach_for_write( ).
+
+CREATE OBJECT r_root AREA HANDLE r_handle.
+CREATE OBJECT r_catalogue AREA HANDLE r_handle.
+
+r_root->catalogue = r_catalogue.
+
+r_handle->set_root( r_root ).
+
+SELECT * FROM spfli INTO TABLE r_catalogue->connections.
+
+r_handle->detach_commit( ).

@@ -1,0 +1,25 @@
+*&---------------------------------------------------------------------*
+*& Include ZZ_3580_FCAT_TOP                                  Module Pool      ZZ_3580_FCAT
+*&
+*&---------------------------------------------------------------------*
+PROGRAM ZZ_3580_FCAT.
+
+TABLES stravelag.
+TABLES scustom.
+
+DATA ok_code LIKE sy-ucomm.
+DATA r_container TYPE REF TO cl_gui_custom_container.
+DATA r_alv TYPE REF TO cl_gui_alv_grid.
+
+TYPES BEGIN OF ty_book.
+ TYPES name TYPE s_custname.
+ TYPES city TYPE city.
+ TYPES country TYPE s_country.
+ INCLUDE TYPE sbook.
+TYPES END OF ty_book.
+
+DATA it_book TYPE TABLE OF ty_book.
+DATA it_custom TYPE TABLE OF scustom.
+DATA wa_custom LIKE LINE OF it_custom.
+DATA it_field_cat TYPE lvc_t_fcat.
+DATA wa_field_cat TYPE lvc_s_fcat.

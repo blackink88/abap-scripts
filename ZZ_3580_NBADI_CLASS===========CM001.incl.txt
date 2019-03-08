@@ -1,0 +1,10 @@
+  method ZIF_BADICOUNTRY~SHOW_MORE.
+
+  DATA i_count TYPE i.
+    SELECT COUNT(*) FROM sflight JOIN spfli ON sflight~carrid = spfli~carrid AND sflight~connid = spfli~connid INTO i_count WHERE countryto = im_country.
+      WRITE:  i_count, 'Flights'.
+
+
+
+
+  endmethod.

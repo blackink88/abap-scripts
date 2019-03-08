@@ -1,0 +1,13 @@
+  method GET_CONNECTION.
+DATA wa TYPE LINE OF zcl_3580_singleton=>ty_connection_list.
+    READ TABLE zcl_3580_singleton=>connection_list
+      WITH TABLE KEY carrid = im_carrid
+                     connid = im_connid
+                               INTO wa.
+    IF sy-subrc = 4.
+      RAISE EXCEPTION TYPE ZCX_3580_EXCEPTION
+EXPORTING carrid = im_carrid connid = im_connid textid = zcx_3580_exception=>no_connection.
+    ENDIF.
+    re_connection = wa.
+
+  endmethod.

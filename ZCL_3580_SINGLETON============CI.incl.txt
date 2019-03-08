@@ -1,0 +1,4 @@
+private section.
+
+  class-data R_INSTANCE type ref to ZCL_3580_SINGLETON .
+  class-data CONNECTION_LIST type TY_CONNECTION_LIST .

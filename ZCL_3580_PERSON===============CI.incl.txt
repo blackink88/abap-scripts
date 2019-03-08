@@ -1,0 +1,5 @@
+private section.
+
+  data NAME type STRING .
+  data DOB type DATE .
+  data ADDRESS type STRING .

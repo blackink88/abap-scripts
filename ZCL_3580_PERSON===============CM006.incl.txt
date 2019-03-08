@@ -1,0 +1,3 @@
+  method SET_ADDRESS.
+address = it_address.
+  endmethod.

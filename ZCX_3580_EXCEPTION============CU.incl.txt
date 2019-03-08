@@ -1,0 +1,36 @@
+class ZCX_3580_EXCEPTION definition
+  public
+  inheriting from CX_STATIC_CHECK
+  create public .
+
+public section.
+
+  interfaces IF_T100_MESSAGE .
+
+  constants:
+    begin of ZCX_3580_EXCEPTION,
+      msgid type symsgid value 'ZZ_3580_MSG',
+      msgno type symsgno value '000',
+      attr1 type scx_attrname value '',
+      attr2 type scx_attrname value '',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of ZCX_3580_EXCEPTION .
+  constants:
+    begin of NO_CONNECTION,
+      msgid type symsgid value 'ZZ_3580_MSG',
+      msgno type symsgno value '001',
+      attr1 type scx_attrname value 'CARRID',
+      attr2 type scx_attrname value 'CONNID',
+      attr3 type scx_attrname value '',
+      attr4 type scx_attrname value '',
+    end of NO_CONNECTION .
+  data CARRID type S_CARR_ID .
+  data CONNID type S_CONN_ID .
+
+  methods CONSTRUCTOR
+    importing
+      !TEXTID like IF_T100_MESSAGE=>T100KEY optional
+      !PREVIOUS like PREVIOUS optional
+      !CARRID type S_CARR_ID optional
+      !CONNID type S_CONN_ID optional .

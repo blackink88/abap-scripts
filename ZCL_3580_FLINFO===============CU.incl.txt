@@ -1,0 +1,19 @@
+class ZCL_3580_FLINFO definition
+  public
+  create public .
+
+public section.
+
+  class-methods GET_N_O_CONNECTIONS
+    importing
+      !IM_CARRID type S_CARR_ID
+    returning
+      value(RE_N_O_CONNECTIONS) type I .
+  class-methods GET_CONNECTION
+    importing
+      !IM_CARRID type S_CARR_ID
+      !IM_CONNID type S_CONN_ID
+    returning
+      value(RE_CONNECTION) type SPFLI
+    raising
+      ZCX_3580_EXCEPTION .

@@ -1,0 +1,9 @@
+*---------------------------------------------------------------------*
+*    generated viewmaintenance function pool top
+*   generation date: 13.06.2015 at 13:28:57 by user USER2-388
+*   view maintenance generator version: #001407#
+*---------------------------------------------------------------------*
+FUNCTION-POOL ZZ_2388_FGP                MESSAGE-ID SV.
+
+  INCLUDE LSVIMDAT                                . "general data decl.
+  INCLUDE LZZ_2388_FGPT00                         . "view rel. data dcl.

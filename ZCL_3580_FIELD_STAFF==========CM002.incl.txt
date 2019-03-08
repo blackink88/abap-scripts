@@ -1,0 +1,5 @@
+  method GET_PERCENTAGE.
+
+    rv_percentage = percentage.
+
+  endmethod.

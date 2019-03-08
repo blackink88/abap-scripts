@@ -1,0 +1,8 @@
+private section.
+
+  data:
+    mv_departmentsname(20) TYPE c .
+  data:
+    ft_employees TYPE  TABLE OF REF TO ZCL_3580_FIELD_STAFF.
+  data:
+    mt_employees TYPE  TABLE OF REF TO ZCL_3580_EMPLOYEE.

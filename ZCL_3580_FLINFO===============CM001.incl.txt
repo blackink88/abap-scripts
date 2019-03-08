@@ -1,0 +1,12 @@
+  method GET_N_O_CONNECTIONS.
+ DATA: wa LIKE LINE OF zcl_3580_singleton=>connection_list,
+         i_count TYPE i VALUE 0.
+
+    LOOP AT zcl_3580_singleton=>connection_list INTO wa.
+      IF wa-carrid = im_carrid.
+         i_count = i_count + 1.
+      ENDIF.
+    ENDLOOP.
+
+    re_n_o_connections = i_count.
+  endmethod.

@@ -1,0 +1,19 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_SDESC
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_SDESC.
+
+PARAMETERS:pa_name TYPE c LENGTH 20.
+
+DATA:
+r_descr TYPE REF TO cl_abap_structdescr,
+gs_comp TYPE abap_compdescr.
+r_descr ?= cl_abap_typedescr=>describe_by_name( pa_name ).
+
+LOOP AT r_descr->components INTO gs_comp.
+  WRITE: / gs_comp-name.
+ENDLOOP.

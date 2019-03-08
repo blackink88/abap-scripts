@@ -1,0 +1,100 @@
+
+
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_COMPANY_3
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_COMPANY_5.
+
+INCLUDE ZZ_3580_COMPANY_5_CLASSES.
+
+START-OF-SELECTION.
+
+ DATA r_employee TYPE REF TO lcl_field_staff.
+ DATA r_employee1 TYPE REF TO lcl_field_staff.
+ DATA r_employee4 TYPE REF TO lcl_field_staff.
+DATA r_employee2 TYPE REF TO lcl_office_employee.
+ DATA r_employee3 TYPE REF TO lcl_office_employee.
+DATA  r_department TYPE REF TO lcl_department.
+DATA  r_departmen TYPE REF TO lcl_department.
+
+WRITE:/'**Output of the department**'.
+SKIP 1.
+
+CREATE OBJECT r_department EXPORTING iv_departmentsname = 'Sales'.
+
+
+
+SET HANDLER r_department->a_employee FOR ALL INSTANCES.
+
+
+
+
+CREATE OBJECT r_employee EXPORTING  it_name = 'Titus'
+                                     it_firstname = 'Kalunga'
+                                     it_adresse =  '5 Ohavera Street, Katutura'
+it_salary = 1000
+im_percentage = 50
+im_sales = 10
+           it_dob = '19890202'.
+
+*
+
+
+
+CREATE OBJECT r_employee1 EXPORTING  it_name = 'Popa'
+                                     it_firstname = 'Okampi'
+                                     it_adresse =  '479 Justus Gaseb Street, Tamariska'
+it_salary = 1000
+im_percentage = 50
+im_sales = 10
+                                     it_dob = '19600808'.
+
+
+CREATE OBJECT r_employee2 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1000
+
+       im_office = '  “Room A17-C'              it_dob = '19880202'.
+
+*
+
+CREATE OBJECT r_employee3 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1000
+im_office = '  “Room A18-B'
+
+                                     it_dob = '19620202'.
+
+
+
+
+
+
+r_department->print( ).
+
+SKIP 1.
+
+WRITE:/'**Output of the Example department**'.
+SKIP 1.
+
+CREATE OBJECT r_departmen EXPORTING iv_departmentsname = 'IT department'.
+
+SET HANDLER r_departmen->a_employee FOR ALL INSTANCES ACTIVATION 'X'.
+
+CREATE OBJECT r_employee4 EXPORTING it_name = 'Theo'
+                                     it_firstname = 'Walcott'
+                                     it_adresse =  '5 Ohavera Street, Katutura'
+it_salary = 1000
+im_percentage = 50
+im_sales = 10
+           it_dob = '19890202'.
+
+
+
+r_departmen->print( ).

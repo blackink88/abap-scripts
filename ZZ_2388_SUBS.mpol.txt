@@ -1,0 +1,19 @@
+*&---------------------------------------------------------------------*
+*& Module Pool       ZZ_2388_SUBS
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+INCLUDE ZZ_2388_SUBS_TOP                        .    " global Data
+
+* INCLUDE ZZ_2388_SUBS_O01                        .  " PBO-Modules
+* INCLUDE ZZ_2388_SUBS_I01                        .  " PAI-Modules
+* INCLUDE ZZ_2388_SUBS_F01                        .  " FORM-Routines
+
+
+INCLUDE ZZ_2388_SUBS_USER_COMMAND_0I01.
+
+INCLUDE ZZ_2388_SUBS_STATUS_0100O01.

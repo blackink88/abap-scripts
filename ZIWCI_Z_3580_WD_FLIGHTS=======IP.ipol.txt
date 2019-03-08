@@ -1,0 +1,4 @@
+interface-pool.
+*"* class pool for interface ZIWCI_Z_3580_WD_FLIGHTS
+
+  include ZIWCI_Z_3580_WD_FLIGHTS=======iu.

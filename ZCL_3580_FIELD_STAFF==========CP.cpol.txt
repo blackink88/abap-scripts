@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_FIELD_STAFF
+
+*"* local type definitions
+include ZCL_3580_FIELD_STAFF==========ccdef.
+
+*"* class ZCL_3580_FIELD_STAFF definition
+*"* public declarations
+  include ZCL_3580_FIELD_STAFF==========cu.
+*"* protected declarations
+  include ZCL_3580_FIELD_STAFF==========co.
+*"* private declarations
+  include ZCL_3580_FIELD_STAFF==========ci.
+endclass. "ZCL_3580_FIELD_STAFF definition
+
+*"* macro definitions
+include ZCL_3580_FIELD_STAFF==========ccmac.
+*"* local class implementation
+include ZCL_3580_FIELD_STAFF==========ccimp.
+
+class ZCL_3580_FIELD_STAFF implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_FIELD_STAFF implementation
+

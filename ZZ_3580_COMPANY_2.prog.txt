@@ -1,0 +1,91 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_COMPANY_2
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_COMPANY_2.
+
+INCLUDE ZZ_3580_COMPANY_2_CLASSES.
+
+START-OF-SELECTION.
+DATA r_department TYPE REF TO lcl_department.
+
+  DATA r_employee TYPE REF TO lcl_field_staff.
+ DATA r_employee1 TYPE REF TO lcl_field_staff.
+ DATA r_employee2 TYPE REF TO lcl_office_employee.
+ DATA r_employee3 TYPE REF TO lcl_office_employee.
+ DATA c_employee TYPE REF TO  lcl_department.
+
+
+
+
+
+
+*
+
+
+
+CREATE OBJECT r_department EXPORTING iv_departmentsname = 'Sales'.
+
+
+
+
+
+
+
+*
+
+
+
+
+CREATE OBJECT r_employee EXPORTING  it_name = 'Titus'
+                                     it_firstname = 'Kalunga'
+                                     it_adresse =  '5 Ohavera Street, Katutura'
+it_salary = 1000
+im_percentage = 50
+im_sales = 10
+                                     it_dob = '19880202'.
+
+*
+
+
+
+
+CREATE OBJECT r_employee1 EXPORTING  it_name = 'Popa'
+                                     it_firstname = 'Okampi'
+                                     it_adresse =  '479 Justus Gaseb Street, Tamariska'
+it_salary = 1000
+im_percentage = 50
+im_sales = 10
+                                     it_dob = '19580402'.
+
+*
+
+
+CREATE OBJECT r_employee2 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1000
+
+       im_office = '  “Room A17-C'              it_dob = '19670207'.
+
+*
+
+
+CREATE OBJECT r_employee3 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1000
+im_office = '  “Room A18-B'
+                                     it_dob = '19700205'.
+
+CALL METHOD r_department->add_employee  EXPORTING ir_employees = r_employee.
+CALL METHOD r_department->add_employee EXPORTING ir_employees = r_employee1.
+CALL METHOD r_department->add_employee  EXPORTING ir_employees = r_employee2.
+CALL METHOD r_department->add_employee  EXPORTING ir_employees = r_employee3.
+
+r_department->print( ).
+
+CALL METHOD r_department->get_avg_percentage.

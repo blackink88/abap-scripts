@@ -1,0 +1,5 @@
+  method SET_SALES.
+
+   sales = im_sales.
+
+  endmethod.

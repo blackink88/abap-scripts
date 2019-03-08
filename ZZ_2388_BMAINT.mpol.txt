@@ -1,0 +1,31 @@
+*&---------------------------------------------------------------------*
+*& Module Pool       ZZ_2388_BMAINT
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+INCLUDE ZZ_2388_BMAINT_TOP                      .    " global Data
+
+* INCLUDE ZZ_2388_BMAINT_O01                      .  " PBO-Modules
+* INCLUDE ZZ_2388_BMAINT_I01                      .  " PAI-Modules
+* INCLUDE ZZ_2388_BMAINT_F01                      .  " FORM-Routines
+
+
+INCLUDE ZZ_2388_BMAINT_STATUS_0100O01.
+
+INCLUDE ZZ_2388_BMAINT_USER_COMMANDI01.
+
+INCLUDE ZZ_2388_BMAINT_STATUS_0200O01.
+
+INCLUDE ZZ_2388_BMAINT_STATUS_0300O01.
+
+INCLUDE ZZ_2388_BMAINT_USER_COMMANDI02.
+
+INCLUDE ZZ_2388_BMAINT_STATUS_0400O01.
+
+INCLUDE ZZ_2388_BMAINT_USER_COMMANDI03.
+
+INCLUDE ZZ_2388_BMAINT_EXITI01.

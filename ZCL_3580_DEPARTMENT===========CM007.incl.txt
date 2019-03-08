@@ -1,0 +1,6 @@
+  method SET_DEPARTMENTSNAME.
+
+
+    mv_departmentsname = iv_departmentsname.
+
+  endmethod.

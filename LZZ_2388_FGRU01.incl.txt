@@ -1,0 +1,49 @@
+FUNCTION Z_2388_F_CALC.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(IM_OPERAND1) TYPE  I
+*"     VALUE(IM_OPERAND2) TYPE  I
+*"     VALUE(IM_OPERATOR) TYPE  C
+*"  EXPORTING
+*"     VALUE(EX_RESULT) TYPE  I
+*"  EXCEPTIONS
+*"      ZERO_DIVISION
+*"      INVALID_OPERATOR
+*"----------------------------------------------------------------------
+
+CASE IM_OPERATOR.
+
+
+
+ WHEN '%'.
+ IF IM_OPERAND2 = 0.
+      RAISE ZERO_DIVISION.
+    ENDIF.
+EX_RESULT = IM_OPERAND1 MOD IM_OPERAND2.
+
+ WHEN '/'.
+ IF IM_OPERAND2 = 0.
+      RAISE ZERO_DIVISION.
+    ENDIF.
+EX_RESULT = IM_OPERAND1 / IM_OPERAND2.
+
+ WHEN '-'.
+EX_RESULT = IM_OPERAND1 - IM_OPERAND2.
+
+ WHEN '*'.
+EX_RESULT = IM_OPERAND1 * IM_OPERAND2.
+
+ WHEN '+'.
+EX_RESULT = IM_OPERAND1 + IM_OPERAND2.
+
+WHEN OTHERS.
+    RAISE INVALID_OPERATOR.
+
+
+
+ENDCASE.
+
+
+
+ENDFUNCTION.

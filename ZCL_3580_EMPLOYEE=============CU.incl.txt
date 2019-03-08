@@ -1,0 +1,28 @@
+class ZCL_3580_EMPLOYEE definition
+  public
+  inheriting from ZCL_3580_PERSON
+  create public .
+
+public section.
+
+  interfaces ZIF_3580_PRINTABLE .
+
+  methods CONSTRUCTOR
+    importing
+      !IT_NAME type STRING
+      !IT_DOB type DATE
+      !IT_BASE_SALARY type INTEGER
+      !IT_ADDRESS type STRING .
+  methods GET_BASE_SALARY
+    returning
+      value(R_BASE_SALARY) type INTEGER .
+  methods SET_BASE_SALARY
+    importing
+      !IT_BASE_SALARY type INTEGER .
+  methods PRINT .
+  methods GET_N_O_EMPLOYEES
+    returning
+      value(R_N_O_EMPLOYEE) type I .
+  methods GET_SALARY
+    returning
+      value(R_SALARY) type INTEGER .

@@ -1,0 +1,10 @@
+*&---------------------------------------------------------------------*
+*& Include ZZ_2388_OMAINT_TOP                                Module Pool      ZZ_2388_OMAINT
+*&
+*&---------------------------------------------------------------------*
+
+PROGRAM  ZZ_2388_OMAINT  MESSAGE-ID ZZ_2388_MESSAGES.
+TABLES ZZ2388_OFFER.
+
+DATA o_conn type ZZ2388_OFFER.
+DATA ok_code LIKE sy-ucomm.

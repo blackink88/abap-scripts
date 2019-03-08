@@ -1,0 +1,10 @@
+*&---------------------------------------------------------------------*
+*& Include ZZ_2388_BMAINT_TOP                                Module Pool      ZZ_2388_BMAINT
+*&
+*&---------------------------------------------------------------------*
+
+PROGRAM  ZZ_2388_BMAINT MESSAGE-ID ZZ_2388_MESSAGES.
+TABLES ZZ2388_BROCH.
+
+DATA b_conn type ZZ2388_BROCH.
+DATA ok_code LIKE sy-ucomm.

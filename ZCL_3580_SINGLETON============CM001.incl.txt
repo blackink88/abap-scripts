@@ -1,0 +1,4 @@
+  method CLASS_CONSTRUCTOR.
+CREATE OBJECT r_instance.
+    SELECT * FROM spfli INTO CORRESPONDING FIELDS OF TABLE connection_list.
+  endmethod.

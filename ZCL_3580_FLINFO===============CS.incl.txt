@@ -1,0 +1,56 @@
+class ZCL_3580_FLINFO definition
+  public
+  create public .
+
+public section.
+
+  class-methods GET_N_O_CONNECTIONS
+    importing
+      !IM_CARRID type S_CARR_ID
+    returning
+      value(RE_N_O_CONNECTIONS) type I .
+  class-methods GET_CONNECTION
+    importing
+      !IM_CARRID type S_CARR_ID
+      !IM_CONNID type S_CONN_ID
+    returning
+      value(RE_CONNECTION) type SPFLI
+    raising
+      ZCX_3580_EXCEPTION .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_3580_FLINFO IMPLEMENTATION.
+
+
+  method GET_CONNECTION.
+DATA wa TYPE LINE OF zcl_3580_singleton=>ty_connection_list.
+    READ TABLE zcl_3580_singleton=>connection_list
+      WITH TABLE KEY carrid = im_carrid
+                     connid = im_connid
+                               INTO wa.
+    IF sy-subrc = 4.
+      RAISE EXCEPTION TYPE ZCX_3580_EXCEPTION
+EXPORTING carrid = im_carrid connid = im_connid textid = zcx_3580_exception=>no_connection.
+    ENDIF.
+    re_connection = wa.
+
+  endmethod.
+
+
+  method GET_N_O_CONNECTIONS.
+ DATA: wa LIKE LINE OF zcl_3580_singleton=>connection_list,
+         i_count TYPE i VALUE 0.
+
+    LOOP AT zcl_3580_singleton=>connection_list INTO wa.
+      IF wa-carrid = im_carrid.
+         i_count = i_count + 1.
+      ENDIF.
+    ENDLOOP.
+
+    re_n_o_connections = i_count.
+  endmethod.
+ENDCLASS.

@@ -1,0 +1,80 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_COMPANY
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_COMPANY.
+
+INCLUDE ZZ_3580_COMPANY_CLASSES.
+
+
+
+
+START-OF-SELECTION.
+DATA r_department TYPE REF TO lcl_department.
+
+  DATA r_employee TYPE REF TO lcl_employee.
+ DATA r_employee1 TYPE REF TO lcl_employee.
+ DATA r_employee2 TYPE REF TO lcl_employee.
+ DATA c_employee TYPE REF TO  lcl_department.
+
+
+
+
+
+
+*
+
+
+
+CREATE OBJECT r_department EXPORTING iv_departmentsname = 'Sales'.
+
+
+
+
+
+
+
+*
+
+
+
+
+CREATE OBJECT r_employee EXPORTING  it_name = 'Titus'
+                                     it_firstname = 'Kalunga'
+                                     it_adresse =  '5 Ohavera Street, Katutura'
+it_salary = 1000
+
+                                     it_dob = '19881212'.
+
+*
+
+
+
+
+CREATE OBJECT r_employee1 EXPORTING  it_name = 'Popa'
+                                     it_firstname = 'Okampi'
+                                     it_adresse =  '479 Justus Gaseb Street, Tamariska'
+it_salary = 1000
+
+                                     it_dob = '19561212'.
+
+*
+
+
+CREATE OBJECT r_employee2 EXPORTING  it_name = 'Kandura'
+                                     it_firstname = 'Mwyeno'
+                                     it_adresse =  '442, Moses Street, Mondesa'
+it_salary = 1500
+
+                                     it_dob = '19671212'.
+
+*
+
+CALL METHOD r_department->add_employee  EXPORTING ir_employees = r_employee.
+CALL METHOD r_department->add_employee EXPORTING ir_employees = r_employee1.
+CALL METHOD r_department->add_employee  EXPORTING ir_employees = r_employee2.
+
+r_department->print( ).

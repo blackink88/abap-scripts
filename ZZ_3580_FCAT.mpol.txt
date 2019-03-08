@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Module Pool       ZZ_3580_FCAT
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+INCLUDE ZZ_3580_FCAT_TOP                        .    " global Data
+
+* INCLUDE ZZ_3580_FCAT_O01                        .  " PBO-Modules
+* INCLUDE ZZ_3580_FCAT_I01                        .  " PAI-Modules
+* INCLUDE ZZ_3580_FCAT_F01                        .  " FORM-Routines
+
+INCLUDE zz_3580_fcat_status_0100o01.
+
+INCLUDE zz_3580_fcat_status_0200o01.
+
+INCLUDE zz_3580_fcat_user_command_0i01.
+
+INCLUDE zz_3580_fcat_user_command_0i02.
+
+INCLUDE zz_3580_fcat_init_alvo01.
+
+INCLUDE zz_3580_fcat_user_command_0i03.
+
+INCLUDE zz_3580_fcat_status_0300o01.
+
+
+
+INCLUDE zz_3580_fcat_user_command_0i04.

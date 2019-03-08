@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZZ_3580_NBADI_CLASS
+
+*"* local type definitions
+include ZZ_3580_NBADI_CLASS===========ccdef.
+
+*"* class ZZ_3580_NBADI_CLASS definition
+*"* public declarations
+  include ZZ_3580_NBADI_CLASS===========cu.
+*"* protected declarations
+  include ZZ_3580_NBADI_CLASS===========co.
+*"* private declarations
+  include ZZ_3580_NBADI_CLASS===========ci.
+endclass. "ZZ_3580_NBADI_CLASS definition
+
+*"* macro definitions
+include ZZ_3580_NBADI_CLASS===========ccmac.
+*"* local class implementation
+include ZZ_3580_NBADI_CLASS===========ccimp.
+
+class ZZ_3580_NBADI_CLASS implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZZ_3580_NBADI_CLASS implementation
+

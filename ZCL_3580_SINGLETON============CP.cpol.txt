@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_SINGLETON
+
+*"* local type definitions
+include ZCL_3580_SINGLETON============ccdef.
+
+*"* class ZCL_3580_SINGLETON definition
+*"* public declarations
+  include ZCL_3580_SINGLETON============cu.
+*"* protected declarations
+  include ZCL_3580_SINGLETON============co.
+*"* private declarations
+  include ZCL_3580_SINGLETON============ci.
+endclass. "ZCL_3580_SINGLETON definition
+
+*"* macro definitions
+include ZCL_3580_SINGLETON============ccmac.
+*"* local class implementation
+include ZCL_3580_SINGLETON============ccimp.
+
+class ZCL_3580_SINGLETON implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_SINGLETON implementation
+

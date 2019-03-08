@@ -1,0 +1,29 @@
+class ZCL_3580_PERSON definition
+  public
+  create public .
+
+public section.
+
+  methods CONSTRUCTOR
+    importing
+      !IT_NAME type STRING
+      !IT_DOB type DATE
+      !IT_ADDRESS type STRING .
+  methods GET_NAME
+    returning
+      value(RE_NAME) type STRING .
+  methods SET_NAME
+    importing
+      value(IT_NAME) type STRING .
+  methods SET_ADDRESS
+    importing
+      !IT_ADDRESS type STRING .
+  methods SET_DOB
+    importing
+      !IT_DOB type DATE .
+  methods GET_ADDRESS
+    returning
+      value(R_ADDRESS) type STRING .
+  methods GET_DOB
+    returning
+      value(R_DOB) type DATE .

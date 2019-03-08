@@ -1,0 +1,3 @@
+method SET_OFFICE.
+office = it_office.
+  endmethod.

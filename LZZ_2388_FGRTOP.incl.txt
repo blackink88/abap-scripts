@@ -1,0 +1,2 @@
+FUNCTION-POOL ZZ_2388_FGR.                  "MESSAGE-ID ..
+

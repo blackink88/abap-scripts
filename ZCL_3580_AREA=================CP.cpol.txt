@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_AREA
+
+*"* local type definitions
+include ZCL_3580_AREA=================ccdef.
+
+*"* class ZCL_3580_AREA definition
+*"* public declarations
+  include ZCL_3580_AREA=================cu.
+*"* protected declarations
+  include ZCL_3580_AREA=================co.
+*"* private declarations
+  include ZCL_3580_AREA=================ci.
+endclass. "ZCL_3580_AREA definition
+
+*"* macro definitions
+include ZCL_3580_AREA=================ccmac.
+*"* local class implementation
+include ZCL_3580_AREA=================ccimp.
+
+class ZCL_3580_AREA implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_AREA implementation
+

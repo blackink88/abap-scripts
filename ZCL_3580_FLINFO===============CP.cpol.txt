@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_FLINFO
+
+*"* local type definitions
+include ZCL_3580_FLINFO===============ccdef.
+
+*"* class ZCL_3580_FLINFO definition
+*"* public declarations
+  include ZCL_3580_FLINFO===============cu.
+*"* protected declarations
+  include ZCL_3580_FLINFO===============co.
+*"* private declarations
+  include ZCL_3580_FLINFO===============ci.
+endclass. "ZCL_3580_FLINFO definition
+
+*"* macro definitions
+include ZCL_3580_FLINFO===============ccmac.
+*"* local class implementation
+include ZCL_3580_FLINFO===============ccimp.
+
+class ZCL_3580_FLINFO implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_FLINFO implementation
+

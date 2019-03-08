@@ -1,0 +1,25 @@
+class ZCL_3580_DEPARTMENT definition
+  public
+  create public .
+
+public section.
+
+  methods CONSTRUCTOR
+    importing
+      !IV_DEPARTMENTSNAME type C .
+  methods SET_DEPARTMENTSNAME
+    importing
+      !IV_DEPARTMENTSNAME type C .
+  methods GET_AVG_SALARY
+    returning
+      value(AVG_DEPARTMENTSNAME) type I .
+  methods GET_AVG_PERCENTAGE
+    returning
+      value(P_DEPARTMENTSNAME) type I .
+  methods GET_DEPARTMENTSNAME
+    returning
+      value(RV_DEPARTMENTSNAME) type STRING .
+  methods ADD_EMPLOYEE
+    importing
+      !IR_EMPLOYEES type ref to ZCL_3580_EMPLOYEE .
+  methods PRINT .

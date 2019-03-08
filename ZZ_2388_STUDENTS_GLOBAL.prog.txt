@@ -1,0 +1,87 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_STUDENTS_GLOBAL
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_STUDENTS_GLOBAL.
+
+PARAMETERS  pa_name TYPE ZZ_2388_ST_NAME.
+PARAMETERS  pa_matr TYPE ZZ_2388_ST_MATR.
+PARAMETERS  pa_fname TYPE ZZ_2388_ST_FIRSTNAME.
+PARAMETERS  pa_lang TYPE ZZ_2388_ST_LANG.
+PARAMETERS  pa_date TYPE ZZ_2388_ST_DATE.
+PARAMETERS  pa_ad TYPE ZZ_2388_ST_ADRESSE.
+
+
+TYPES: BEGIN OF ZZ2388_STUD,
+ZZ_2388_ST_NAME(20) TYPE c,
+ZZ_2388_ST_MATR(10) TYPE n,
+ZZ_2388_ST_FIRSTNAME(20) TYPE c,
+ZZ_2388_ST_ADRESSE(50) TYPE c,
+ZZ_2388_ST_LANG(20) TYPE c,
+ZZ_2388_ST_DATE TYPE d,
+
+END OF ZZ2388_STUD.
+
+
+
+DATA stu1 TYPE ZZ2388_STUD.
+stu1-ZZ_2388_ST_NAME = 'Sam'.
+stu1-ZZ_2388_ST_MATR = '100000'.
+stu1-ZZ_2388_ST_FIRSTNAME = 'Kauto'.
+stu1-ZZ_2388_ST_LANG = 'English'.
+stu1-ZZ_2388_ST_DATE = '20141212'.
+stu1-ZZ_2388_ST_ADRESSE = 'Justus Gaseb Street Namibia'.
+
+
+DATA stu2 TYPE ZZ2388_STUD.
+stu2-ZZ_2388_ST_NAME = 'Tom'.
+stu2-ZZ_2388_ST_MATR = '12323112'.
+stu2-ZZ_2388_ST_FIRSTNAME = 'Steve'.
+stu2-ZZ_2388_ST_LANG = 'English'.
+stu2-ZZ_2388_ST_DATE = '20121212'.
+stu2-ZZ_2388_ST_ADRESSE = 'Tim Street Nam'.
+
+DATA stu3 TYPE ZZ2388_STUD.
+stu3-ZZ_2388_ST_NAME = 'Mario'.
+stu3-ZZ_2388_ST_MATR = '10000222'.
+stu3-ZZ_2388_ST_FIRSTNAME = 'Bra'.
+stu3-ZZ_2388_ST_LANG = 'Afrikaans'.
+stu3-ZZ_2388_ST_DATE = '20141111'.
+stu3-ZZ_2388_ST_ADRESSE = 'Cape Town South Africa'.
+
+DATA stu4 TYPE ZZ2388_STUD.
+stu4-ZZ_2388_ST_NAME = 'Paloma'.
+stu4-ZZ_2388_ST_MATR = '2012121'.
+stu4-ZZ_2388_ST_FIRSTNAME = 'Mbulu'.
+stu4-ZZ_2388_ST_LANG = 'English'.
+stu4-ZZ_2388_ST_DATE = '20101212'.
+stu4-ZZ_2388_ST_ADRESSE = 'Swakopmund Namibia'.
+
+DATA stu5 TYPE ZZ2388_STUD.
+stu5-ZZ_2388_ST_NAME = 'Mpho'.
+stu5-ZZ_2388_ST_MATR = '2012121'.
+stu5-ZZ_2388_ST_FIRSTNAME = 'Bailey'.
+stu5-ZZ_2388_ST_LANG = 'English'.
+stu5-ZZ_2388_ST_DATE = '20121005'.
+stu5-ZZ_2388_ST_ADRESSE = 'Arandis Namibia West'.
+
+
+
+
+TYPES tab_stu TYPE STANDARD TABLE OF ZZ2388_STUD WITH KEY ZZ_2388_ST_MATR.
+DATA ZZ_2388_STUD_TAB TYPE tab_stu.
+
+INSERT stu1 INTO TABLE ZZ_2388_STUD_TAB.
+INSERT stu2 INTO TABLE ZZ_2388_STUD_TAB.
+INSERT stu3 INTO TABLE ZZ_2388_STUD_TAB.
+INSERT stu4 INTO TABLE ZZ_2388_STUD_TAB.
+INSERT stu5 INTO TABLE ZZ_2388_STUD_TAB.
+
+LOOP AT ZZ_2388_STUD_TAB INTO stu1.
+ WRITE:  / 'Student Last Name:',stu1-ZZ_2388_ST_NAME, / 'Matric Number:',stu1-ZZ_2388_ST_MATR, / 'First Name:',stu1-ZZ_2388_ST_FIRSTNAME, / 'Prefered Language:',stu1-ZZ_2388_ST_LANG, / 'Date Registered:',stu1-ZZ_2388_ST_DATE,
+/ 'Adresse:',stu1-ZZ_2388_ST_ADRESSE.
+ENDLOOP.

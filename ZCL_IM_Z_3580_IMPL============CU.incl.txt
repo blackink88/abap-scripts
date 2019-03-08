@@ -1,0 +1,8 @@
+class ZCL_IM_Z_3580_IMPL definition
+  public
+  final
+  create public .
+
+public section.
+
+  interfaces ZIF_EX_BADI3580 .

@@ -1,0 +1,7 @@
+  method ZIF_3580_PRINTABLE~PRINT_OBJECT.
+
+
+me->print( ).
+
+
+  endmethod.

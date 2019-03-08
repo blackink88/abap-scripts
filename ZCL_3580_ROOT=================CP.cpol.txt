@@ -1,0 +1,25 @@
+class-pool .
+*"* class pool for class ZCL_3580_ROOT
+
+*"* local type definitions
+include ZCL_3580_ROOT=================ccdef.
+
+*"* class ZCL_3580_ROOT definition
+*"* public declarations
+  include ZCL_3580_ROOT=================cu.
+*"* protected declarations
+  include ZCL_3580_ROOT=================co.
+*"* private declarations
+  include ZCL_3580_ROOT=================ci.
+endclass. "ZCL_3580_ROOT definition
+
+*"* macro definitions
+include ZCL_3580_ROOT=================ccmac.
+*"* local class implementation
+include ZCL_3580_ROOT=================ccimp.
+
+class ZCL_3580_ROOT implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_3580_ROOT implementation
+

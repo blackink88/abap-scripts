@@ -1,0 +1,396 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZZ_3580_COMPANY_CLASSES
+*&---------------------------------------------------------------------*
+
+
+CLASS lcl_employee DEFINITION.
+  PUBLIC SECTION.
+
+    METHODS:
+    constructor IMPORTING it_name TYPE c
+                          it_firstname TYPE c
+                          it_adresse TYPE c
+                          it_dob TYPE d
+                          it_salary TYPE i,
+     set_name IMPORTING  it_name TYPE c,
+     set_firstname IMPORTING it_firstname TYPE c,
+     set_adresse IMPORTING it_adresse TYPE c,
+     set_dob IMPORTING it_dob TYPE d,
+     get_fullname RETURNING VALUE(rv_fullname) TYPE STRING,
+     get_name RETURNING VALUE(rv_name) TYPE STRING,
+     get_firstname RETURNING VALUE(rv_firstname) TYPE STRING,
+     get_adresse RETURNING VALUE(rv_adresse) TYPE STRING,
+     get_dob RETURNING VALUE(rv_dob) TYPE d,
+     get_base_salary RETURNING VALUE(rv_base_salary) TYPE i,
+     get_salary  RETURNING VALUE(rv_salary) TYPE i ,
+     init_base_salary RETURNING VALUE(im_base_salary) TYPE i,
+
+     get_n_o_employees RETURNING VALUE(rv_n_o_employees) TYPE i,
+     print.
+
+
+  PRIVATE SECTION.
+    DATA:
+    NAME(10) TYPE c,
+    firstname(10) TYPE c,
+    adresse(30) TYPE c,
+    dob like sy-datum,
+    base_salary TYPE i,
+    fullname(20) TYPE c,
+    salary TYPE i,
+    heute TYPE sy-datum,
+    diff TYPE num2,
+  ct_employees TYPE  TABLE OF REF TO lcl_employee.
+    CLASS-DATA n_o_employees TYPE i VALUE 0.
+
+
+
+
+ENDCLASS.                    "lcl_employee DEFINITION
+CLASS  lcl_employee IMPLEMENTATION.
+
+  METHOD set_name.
+    NAME = it_name.
+  ENDMETHOD.                    "set_name
+
+
+
+
+
+
+  METHOD set_firstname.
+    firstname = it_firstname.
+  ENDMETHOD.                    "set_firstname
+
+  METHOD set_adresse.
+    adresse = it_adresse.
+  ENDMETHOD.                    "set_adresse
+
+  METHOD set_dob.
+    dob = it_dob.
+  ENDMETHOD.                    "set_dob
+
+
+  METHOD get_adresse.
+    rv_adresse = adresse.
+  ENDMETHOD.                    "get_adresse
+
+  METHOD get_name.
+    rv_name = NAME.
+  ENDMETHOD.                    "get_name
+
+  METHOD get_firstname.
+    rv_firstname = firstname.
+  ENDMETHOD.                    "get_firstname
+
+  METHOD get_dob.
+    rv_dob = dob.
+  ENDMETHOD.                    "get_dob
+
+
+
+
+  METHOD get_base_salary.
+    rv_base_salary = base_salary.
+  ENDMETHOD.
+
+    "get_base_salary
+
+
+
+  METHOD get_salary.
+DATA:
+s_age type num2.
+
+s_age = sy-datum(4) - dob(4).
+
+   IF s_age > 40 and s_age < 50.
+      salary = base_salary + ( base_salary * '0.05' ).
+    ELSEIF s_age > 50.
+      salary =  base_salary + ( base_salary * '0.8' ).
+    ELSE.
+      salary = base_salary.
+    ENDIF.
+    rv_salary = salary.
+
+  ENDMETHOD.                    "get_salary
+  METHOD get_fullname.
+    DATA sep(3) TYPE c VALUE '   '.
+    CONCATENATE NAME firstname INTO fullname SEPARATED BY sep.
+    rv_fullname = fullname.
+
+  ENDMETHOD.                    "get_fullname
+
+  METHOD constructor.
+    NAME = it_name.
+    firstname = it_firstname.
+    adresse  = it_adresse.
+    dob = it_dob.
+    base_salary = it_salary.
+    n_o_employees = n_o_employees + 1.
+  ENDMETHOD.                    "Constructor
+
+  METHOD print.
+    DATA:
+    ld_fullname TYPE char50,
+    ld_salary TYPE i,
+age type num2.
+
+age =  sy-datum(4) - dob(4).
+
+    ld_fullname = me->get_fullname( ).
+    ld_salary = me->get_salary( ).
+
+    WRITE: /  'Name:', ld_fullname,  'Adresse:', adresse, 'Salary:', ld_salary, 'Age', age.
+New-Line.
+
+  ENDMETHOD.                    "print
+
+
+  METHOD init_base_salary.
+
+    IF salary < 0.
+      base_salary = 0.
+    ELSE.
+      salary = salary.
+    ENDIF.
+
+  ENDMETHOD.                    "init_base_salary
+
+  METHOD get_n_o_employees.
+    rv_n_o_employees = n_o_employees.
+    WRITE:  n_o_employees, 'Employees have been created'.
+  ENDMETHOD.                    "get_n_o_employees
+
+ENDCLASS.                    "lcl_employee IMPLEMENTATION
+
+
+CLASS lcl_office_employee DEFINITION INHERITING FROM lcl_employee.
+PUBLIC SECTION.
+METHODS:
+constructor IMPORTING it_name TYPE c
+                          it_firstname TYPE c
+                          it_adresse TYPE c
+                          it_dob TYPE d
+                          it_salary TYPE i
+                          im_office TYPE c,
+set_office IMPORTING im_office TYPE c,
+get_office RETURNING VALUE(rv_office) TYPE STRING,
+print REDEFINITION.
+PRIVATE SECTION.
+DATA:
+      office(20) TYPE c.
+ENDCLASS.
+
+CLASS lcl_office_employee IMPLEMENTATION.
+METHOD constructor.
+ SUPER->CONSTRUCTOR( it_name = it_name
+    it_firstname = it_firstname
+     it_adresse = it_adresse
+    it_dob = it_dob
+    it_salary = it_salary ).
+
+office = im_office.
+ ENDMETHOD.
+
+   METHOD set_office.
+   office = office.
+  ENDMETHOD.
+
+         "set_dob
+
+
+
+  METHOD get_office.
+    rv_office = office.
+  ENDMETHOD.
+
+   METHOD print.
+     super->print( ).
+    WRITE: 'Office:', office.
+  ENDMETHOD.
+
+ENDCLASS.
+CLASS lcl_field_staff DEFINITION INHERITING FROM lcl_employee.
+ PUBLIC SECTION.
+ METHODS:
+ constructor IMPORTING  it_name TYPE c
+                          it_firstname TYPE c
+                          it_adresse TYPE c
+                          it_dob TYPE d
+                          it_salary TYPE i
+                          im_percentage TYPE i
+                          im_sales TYPE i,
+print REDEFINITION,
+set_percentage IMPORTING im_percentage TYPE i,
+get_percentage RETURNING VALUE(rv_percentage) TYPE STRING,
+set_sales IMPORTING im_sales TYPE i,
+get_sales RETURNING VALUE(rv_sales) TYPE STRING.
+
+ PRIVATE SECTION.
+ DATA:
+       percentage TYPE i,
+       sales TYPE P.
+
+ENDCLASS.
+
+CLASS lcl_field_staff IMPLEMENTATION.
+ METHOD constructor.
+ SUPER->CONSTRUCTOR( it_name = it_name
+     it_firstname = it_firstname
+     it_adresse = it_adresse
+     it_dob = it_dob
+     it_salary = it_salary  ).
+percentage = im_percentage.
+sales = im_sales.
+ENDMETHOD.
+
+  METHOD set_percentage.
+   percentage = im_percentage.
+  ENDMETHOD.                    "set_dob
+
+  METHOD get_percentage.
+    rv_percentage = percentage.
+  ENDMETHOD.
+
+   METHOD set_sales.
+   sales = im_sales.
+  ENDMETHOD.                    "set_dob
+
+  METHOD get_sales.
+    rv_sales = sales.
+  ENDMETHOD.            "
+
+
+  METHOD print.
+    super->print( ).
+.
+
+   WRITE: 'Sales', sales , 'Percentage', percentage.
+  ENDMETHOD.
+ENDCLASS.
+
+CLASS lcl_department DEFINITION.
+
+  PUBLIC SECTION.
+    METHODS:
+       constructor IMPORTING iv_departmentsname TYPE c,
+
+
+
+       set_departmentsname IMPORTING  iv_departmentsname TYPE c,
+get_avg_salary RETURNING VALUE(avg_departmentsname) TYPE i,
+        get_departmentsname RETURNING VALUE(rv_departmentsname) TYPE STRING,
+       add_employee IMPORTING ir_employees TYPE REF TO lcl_employee,
+
+       print.
+
+
+  PRIVATE SECTION.
+    DATA:
+          mv_departmentsname(20) TYPE c,
+
+         mt_employees TYPE  TABLE OF REF TO lcl_employee.
+
+
+
+
+
+
+ENDCLASS.                    "lcl_department DEFINITION
+
+*---------------------------------------------------------------------*
+*       CLASS lcl_department IMPLEMENTATION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_department IMPLEMENTATION.
+  METHOD set_departmentsname.
+
+    mv_departmentsname = iv_departmentsname.
+  ENDMETHOD.                    "set_departmentsname
+
+
+
+
+
+
+
+METHOD get_departmentsname.
+    rv_departmentsname = mv_departmentsname.
+
+
+  ENDMETHOD.
+
+                 "get average
+
+
+
+METHOD get_avg_salary.
+DATA c_employee TYPE REF TO lcl_employee.
+
+
+LOOP AT mt_employees INTO c_employee.
+DATA c TYPE i.
+      c =   c + c_employee->get_salary( ).
+ENDLOOP.
+avg_departmentsname = c / c_employee->get_n_o_employees( ).
+WRITE: / 'This', avg_departmentsname.
+
+  ENDMETHOD.
+
+
+
+
+  METHOD add_employee.
+
+
+APPEND ir_employees TO mt_employees.
+
+
+
+
+  ENDMETHOD.                    "add_employee
+
+
+
+  METHOD constructor.
+
+mv_departmentsname = iv_departmentsname.
+
+
+
+
+  ENDMETHOD.
+
+
+           "constructor
+
+  METHOD print.
+WRITE: / 'Employees of the department', mv_departmentsname.
+
+
+
+DATA r_employee TYPE REF TO lcl_employee.
+
+
+LOOP AT mt_employees INTO r_employee.
+
+ r_employee->print( ).
+
+
+
+ENDLOOP.
+
+
+r_employee->get_n_o_employees( ).
+
+
+
+
+
+  ENDMETHOD.                    "print
+
+
+
+ENDCLASS.                    "lcl_department IMPLEMENTATION

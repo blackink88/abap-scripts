@@ -1,0 +1,7 @@
+  method GET_DEPARTMENTSNAME.
+
+    rv_departmentsname = mv_departmentsname.
+
+
+
+  endmethod.

@@ -1,0 +1,9 @@
+  method CONSTRUCTOR.
+call method super->constructor( ).
+name = it_name.
+
+address  = it_address.
+dob = it_dob.
+
+
+  endmethod.

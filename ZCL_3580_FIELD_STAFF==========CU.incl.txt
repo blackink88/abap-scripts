@@ -1,0 +1,30 @@
+class ZCL_3580_FIELD_STAFF definition
+  public
+  inheriting from ZCL_3580_EMPLOYEE
+  create public .
+
+public section.
+
+  methods CONSTRUCTOR
+    importing
+      !IT_NAME type STRING
+      !IT_ADDRESS type STRING
+      !IT_DOB type DATE
+      !IT_BASE_SALARY type I
+      !IM_PERCENTAGE type I
+      !IM_SALES type I .
+  methods SET_PERCENTAGE
+    importing
+      !IM_PERCENTAGE type I .
+  methods GET_PERCENTAGE
+    returning
+      value(RV_PERCENTAGE) type STRING .
+  methods SET_SALES
+    importing
+      !IM_SALES type I .
+  methods GET_SALES
+    returning
+      value(RV_SALES) type STRING .
+
+  methods PRINT
+    redefinition .

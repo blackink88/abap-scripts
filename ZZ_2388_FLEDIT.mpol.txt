@@ -1,0 +1,29 @@
+*&---------------------------------------------------------------------*
+*& Module Pool       ZZ_2388_FLEDIT
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+
+INCLUDE ZZ_2388_FLEDITT_TOP                     .    " global Data
+
+* INCLUDE ZZ_2388_FLEDITT_O01                     .  " PBO-Modules
+* INCLUDE ZZ_2388_FLEDITT_I01                     .  " PAI-Modules
+* INCLUDE ZZ_2388_FLEDITT_F01                     .  " FORM-Routines
+
+
+INCLUDE ZZ_2388_FLEDIT_VALUE_REQUESI01.
+
+INCLUDE ZZ_2388_FLEDIT_STATUS_0100O01.
+
+INCLUDE ZZ_2388_FLEDIT_USER_COMMANDI01.
+
+INCLUDE ZZ_2388_FLEDIT_STATUS_0200O01.
+
+INCLUDE ZZ_2388_FLEDIT_USER_COMMANDI02.
+
+INCLUDE ZZ_2388_FLEDIT_EXITI01.
+
+INCLUDE ZZ_2388_FLEDIT_CHECK_INPUTI01.

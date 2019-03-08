@@ -1,0 +1,3 @@
+METHOD GET_NAME .
+re_name = name.
+ENDMETHOD.

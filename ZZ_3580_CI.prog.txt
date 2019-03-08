@@ -1,0 +1,17 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_CI
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_3580_CI.
+
+
+DATA itab TYPE TABLE OF spfli.
+DATA wa TYPE spfli.
+
+SELECT * FROM spfli INTO wa WHERE carrid = 'LH'.
+  WRITE: / wa-connid, wa-cityfrom, wa-cityto.
+ENDSELECT.

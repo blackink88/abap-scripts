@@ -1,0 +1,14 @@
+  method GET_AVG_SALARY.
+
+DATA c_employee TYPE REF TO ZCL_3580_EMPLOYEE.
+
+
+LOOP AT mt_employees INTO c_employee.
+DATA c TYPE i.
+      c =   c + c_employee->get_salary( ).
+ENDLOOP.
+avg_departmentsname = c / c_employee->get_n_o_employees( ).
+WRITE: / 'This', avg_departmentsname.
+
+
+  endmethod.

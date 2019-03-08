@@ -1,0 +1,17 @@
+  method PRINT.
+DATA:
+    ld_fullname TYPE char50,
+    ld_salary TYPE i,
+ address(30) TYPE c,
+   dob like sy-datum,
+age type num2.
+dob = me->get_dob( ).
+age = sy-datum(4) -  dob(4).
+address = me->get_address( ).
+
+    ld_fullname = me->get_name( ).
+    ld_salary = me->get_salary( ).
+
+    WRITE: /  'Name:', ld_fullname,  'Adresse:', address, 'Salary:', ld_salary, 'Age', age.
+New-Line.
+  endmethod.

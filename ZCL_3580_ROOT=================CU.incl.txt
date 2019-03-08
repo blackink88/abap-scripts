@@ -1,0 +1,8 @@
+class ZCL_3580_ROOT definition
+  public
+  create public
+  shared memory enabled .
+
+public section.
+
+  data CATALOGUE type ref to ZCL_3580_CATALOGUE .

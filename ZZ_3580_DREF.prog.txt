@@ -1,0 +1,28 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_3580_DREF
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT ZZ_3580_DREF.
+
+DATA:
+      cityfrom TYPE spfli-cityfrom,
+      ref_cityto TYPE REF TO spfli-cityto,
+      ref_generic TYPE REF TO data.
+
+cityfrom = 'FRANKFURT'.
+
+GET REFERENCE OF cityfrom INTO ref_cityto.
+WRITE ref_cityto->*.
+
+ref_generic = ref_cityto.
+FIELD-SYMBOLS <fs1> TYPE ANY.
+ASSIGN ref_generic->* TO <fs1>.
+WRITE: <fs1>.
+
+GET REFERENCE OF cityfrom INTO ref_generic.
+FIELD-SYMBOLS <fs2> TYPE ANY.
+ASSIGN ref_generic->* TO <fs2>.
+WRITE: <fs2>.

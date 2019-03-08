@@ -1,0 +1,11 @@
+class ZCL_3580_CATALOGUE definition
+  public
+  create public
+  shared memory enabled .
+
+public section.
+
+  types:
+    TY_CONNECTION_LIST TYPE TABLE OF spfli WITH KEY carrid connid .
+
+  data CONNECTIONS type TY_CONNECTION_LIST .

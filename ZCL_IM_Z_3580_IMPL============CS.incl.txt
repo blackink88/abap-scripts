@@ -1,0 +1,20 @@
+class ZCL_IM_Z_3580_IMPL definition
+  public
+  final
+  create public .
+
+public section.
+
+  interfaces ZIF_EX_BADI3580 .
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZCL_IM_Z_3580_IMPL IMPLEMENTATION.
+
+
+  method ZIF_EX_BADI3580~SHOW_CUSTOMER_DETAILS.
+  endmethod.
+ENDCLASS.

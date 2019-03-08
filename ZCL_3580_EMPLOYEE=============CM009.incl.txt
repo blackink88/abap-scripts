@@ -1,0 +1,3 @@
+  method SET_BASE_SALARY.
+base_salary = it_BASE_SALARY.
+  endmethod.

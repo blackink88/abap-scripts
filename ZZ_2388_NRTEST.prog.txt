@@ -1,0 +1,22 @@
+*&---------------------------------------------------------------------*
+*& Report  ZZ_2388_NRTEST
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZZ_2388_NRTEST.
+
+Data number type i.
+
+
+CALL FUNCTION 'NUMBER_GET_NEXT'
+EXPORTING
+nr_range_nr = '1'
+object = 'ZZ_2388_NR'
+IMPORTING
+number = number.
+
+
+write:  number ,'was the number'.

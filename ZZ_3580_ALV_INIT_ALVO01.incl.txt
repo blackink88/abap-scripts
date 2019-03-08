@@ -1,0 +1,71 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_3580_ALV_INIT_ALVO01.
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  INIT_ALV  OUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE INIT_ALV OUTPUT.
+  CREATE OBJECT r_container
+    EXPORTING
+      container_name = 'MY_CUSTOM_CONTROL'.
+
+  CREATE OBJECT r_alv
+    EXPORTING
+*      i_shellstyle      = 0    " Control Style
+*      i_lifetime        =     " Lifetime
+      i_parent          = r_container    " Parent-Container
+*      i_appl_events     = SPACE    " Ereignisse als Applikationsevents registrieren
+*      i_parentdbg       =     " Internal, donnot use.
+*      i_applogparent    =     " Container for application log
+*      i_graphicsparent  =     " Container for graphics
+*      i_name            =     " Name
+*      i_fcat_complete   = SPACE    " boolsche Variable (X=true, space=false)
+*    EXCEPTIONS
+*      error_cntl_create = 1
+*      error_cntl_init   = 2
+*      error_cntl_link   = 3
+*      error_dp_create   = 4
+*      others            = 5
+    .
+  IF sy-subrc <> 0.
+*   MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+*              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+  ENDIF.
+
+  SELECT * FROM scarr INTO TABLE it_scarr.
+
+CALL METHOD r_alv->set_table_for_first_display
+   EXPORTING
+*    i_buffer_active               =
+*    i_bypassing_buffer            =
+*    i_consistency_check           =
+    i_structure_name              = 'scarr'
+*    is_variant                    =
+*    i_save                        =
+*    i_default                     = 'X'
+*    is_layout                     =
+*    is_print                      =
+*    it_special_groups             =
+*    it_toolbar_excluding          =
+*    it_hyperlink                  =
+*    it_alv_graphics               =
+*    it_except_qinfo               =
+*    ir_salv_adapter               =
+  CHANGING
+    it_outtab                     = it_scarr
+*    it_fieldcatalog               =
+*    it_sort                       =
+*    it_filter                     =
+*  EXCEPTIONS
+*    invalid_parameter_combination = 1
+*    program_error                 = 2
+*    too_many_lines                = 3
+*    others                        = 4
+        .
+IF sy-subrc <> 0.
+* Implement suitable error handling here
+ENDIF.
+
+ENDMODULE.

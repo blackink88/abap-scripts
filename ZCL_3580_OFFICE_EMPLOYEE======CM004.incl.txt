@@ -1,0 +1,4 @@
+  method PRINT.
+super->print( ).
+ WRITE: 'Office:', office.
+  endmethod.

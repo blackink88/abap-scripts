@@ -1,0 +1,89 @@
+*----------------------------------------------------------------------*
+***INCLUDE ZZ_3580_FCAT_INIT_ALVO01.
+*----------------------------------------------------------------------*
+*&---------------------------------------------------------------------*
+*&      Module  INIT_ALV  OUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+
+INCLUDE zz_3580_fcat_classes.
+
+MODULE INIT_ALV OUTPUT.
+
+CREATE OBJECT r_container
+    EXPORTING
+      container_name = 'MY_AREA'.
+
+IF r_alv IS INITIAL.
+  CREATE OBJECT r_alv
+    EXPORTING
+      i_parent = r_container.
+
+
+SET HANDLER lcl_event_handler=>on_double_click FOR r_alv.
+SET HANDLER lcl_event_handler=>on_toolbar FOR r_alv.
+SET HANDLER lcl_event_handler=>on_user_command FOR r_alv.
+SET HANDLER lcl_event_handler=>on_top_of_list FOR r_alv.
+
+DATA my_print TYPE lvc_s_prnt.
+my_print-grpchgedit = 'X'.
+
+  wa_field_cat-fieldname = 'NAME'.
+  wa_field_cat-ref_field = 'NAME'.
+  wa_field_cat-ref_table = 'SCUSTOM'.
+  wa_field_cat-outputlen = 15.
+  INSERT wa_field_cat INTO TABLE it_field_cat.
+
+  wa_field_cat-fieldname = 'CITY'.
+  wa_field_cat-ref_field = 'CITY'.
+  wa_field_cat-ref_table = 'SCUSTOM'.
+  wa_field_cat-outputlen = 10.
+  INSERT wa_field_cat INTO TABLE it_field_cat.
+
+  wa_field_cat-fieldname = 'COUNTRY'.
+  wa_field_cat-ref_field = 'COUNTRY'.
+  wa_field_cat-ref_table = 'SCUSTOM'.
+  INSERT wa_field_cat INTO TABLE it_field_cat.
+
+    r_alv->set_table_for_first_display(
+    EXPORTING
+*      i_buffer_active               =     "
+*      i_bypassing_buffer            =     "
+*      i_consistency_check           =     "
+      i_structure_name              =  'SBOOK'   "
+*      is_variant                    =     "
+*      i_save                        =     "
+*      i_default                     = 'X'    "
+*      is_layout                     =     "
+      is_print                      =  my_print   "
+*      it_special_groups             =     "
+*      it_toolbar_excluding          =     "
+*      it_hyperlink                  =     "
+*      it_alv_graphics               =
+*      it_except_qinfo               =     "
+*      ir_salv_adapter               =
+    CHANGING
+      it_outtab                     =  it_book
+      it_fieldcatalog               =  it_field_cat
+*      it_sort                       =
+*      it_filter                     =
+*    EXCEPTIONS
+*      invalid_parameter_combination = 1
+*      program_error                 = 2
+*      too_many_lines                = 3
+*      others                        = 4
+  ).
+
+ELSE.
+    r_alv->refresh_table_display(
+*      EXPORTING
+*        is_stable      =
+*        i_soft_refresh =
+*      EXCEPTIONS
+*        finished       = 1
+*        others         = 2
+    ).
+ENDIF.
+
+ENDMODULE.

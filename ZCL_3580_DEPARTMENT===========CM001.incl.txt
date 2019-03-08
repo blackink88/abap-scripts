@@ -1,0 +1,11 @@
+  method ADD_EMPLOYEE.
+
+
+
+APPEND ir_employees TO mt_employees.
+
+
+
+
+
+  endmethod.
